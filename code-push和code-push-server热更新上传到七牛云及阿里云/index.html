@@ -136,11 +136,12 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1319536-f908a83490d6fd39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1319536-329b0c2d8ee93154.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1319536-eafd9d90e27af87b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1319536-0aa6703f3bdf5621.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1319536-63a305a06befae8a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1319536-7837ff72f3efe50c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1319536-13fadc465fd53f42.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1319536-54fd7a4b1b2e1169.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-11-06T09:26:22.000Z">
+<meta property="og:updated_time" content="2018-11-06T09:41:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="code-push和code-push-server热更新上传到七牛云及阿里云">
 <meta name="twitter:description" content="一、自建 CodePush 服务CodePush 服务主要分为三个部分：服务端、客户端、React Native 项目。">
@@ -412,7 +413,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-06 17:26:22" itemprop="dateModified" datetime="2018-11-06T17:26:22+08:00">2018-11-06</time>
+                <time title="修改时间：2018-11-06 17:41:47" itemprop="dateModified" datetime="2018-11-06T17:41:47+08:00">2018-11-06</time>
               
             
           </span>
@@ -537,7 +538,7 @@
 <pre><code>心得:另外,我们也可以将deployment-key存放在local.properties中:
 </code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">code_push_key_production=erASzHa1-wTdODdPJDh6DBF2Jwo94JFH08Kvb</span><br><span class="line">code_push_key_staging=mQY75RkFbX6SiZU1kVT1II7OqWst4JFH08Kvb</span><br></pre></td></tr></table></figure>
 <p>如图:</p>
-<p>![local.properties存放codepush-key.png](<a href="https://upload-images.jianshu.io/upload_images/1319536-0aa6703f3bdf5621.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" target="_blank" rel="noopener">https://upload-images.jianshu.io/upload_images/1319536-0aa6703f3bdf5621.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240</a></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1319536-0aa6703f3bdf5621.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="local.properties存放codepush-key.png"></p>
 <p>然后在就可以在<code>android/app/build.gradle</code>可以通过下面方式来引用它了:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Properties properties = new Properties()</span><br><span class="line">properties.load(project.rootProject.file(<span class="string">'local.properties'</span>).newDataInputStream())</span><br><span class="line">android &#123;</span><br><span class="line">    ...</span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        debug &#123;</span><br><span class="line">            ...</span><br><span class="line">            // CodePush updates should not be tested <span class="keyword">in</span> Debug mode</span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        releaseStaging &#123;</span><br><span class="line">            ...</span><br><span class="line">            buildConfigField <span class="string">"String"</span>, <span class="string">"CODEPUSH_KEY"</span>, <span class="string">'"'</span>+properties.getProperty(<span class="string">"code_push_key_production"</span>)+<span class="string">'"'</span></span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        release &#123;</span><br><span class="line">            ...</span><br><span class="line">            buildConfigField <span class="string">"String"</span>, <span class="string">"CODEPUSH_KEY"</span>, <span class="string">'"'</span>+properties.getProperty(<span class="string">"code_push_key_staging"</span>)+<span class="string">'"'</span></span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在<code>android/app/build.gradle</code>设置好<code>deployment-key</code>之后呢,我们就可以这样使用了:</p>
