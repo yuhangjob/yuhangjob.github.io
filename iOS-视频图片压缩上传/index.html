@@ -115,25 +115,25 @@
 
 
 
-  <meta name="description" content="基于AFNetworking 3.0图片上传的封装">
+  <meta name="description" content="iOS视频图片压缩上传">
 <meta name="keywords" content="Object-C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS AFNetworking 3.0 上传图片视频到服务器">
-<meta property="og:url" content="http://yuhangjob.top/iOS-AFNetworking-3-0-上传图片视频到服务器/index.html">
+<meta property="og:title" content="iOS视频图片压缩上传">
+<meta property="og:url" content="http://yuhangjob.top/iOS-视频图片压缩上传/index.html">
 <meta property="og:site_name" content="YH&#39;S Develop Blog">
-<meta property="og:description" content="基于AFNetworking 3.0图片上传的封装">
+<meta property="og:description" content="iOS视频图片压缩上传">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-06T09:31:14.000Z">
+<meta property="og:updated_time" content="2018-11-07T07:35:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS AFNetworking 3.0 上传图片视频到服务器">
-<meta name="twitter:description" content="基于AFNetworking 3.0图片上传的封装">
+<meta name="twitter:title" content="iOS视频图片压缩上传">
+<meta name="twitter:description" content="iOS视频图片压缩上传">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yuhangjob.top/iOS-AFNetworking-3-0-上传图片视频到服务器/">
+  <link rel="canonical" href="http://yuhangjob.top/iOS-视频图片压缩上传/">
 
 
 
@@ -143,7 +143,7 @@
   };
 </script>
 
-  <title>iOS AFNetworking 3.0 上传图片视频到服务器 | YH'S Develop Blog</title>
+  <title>iOS视频图片压缩上传 | YH'S Develop Blog</title>
   
 
 
@@ -339,7 +339,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuhangjob.top/iOS-AFNetworking-3-0-上传图片视频到服务器/">
+    <link itemprop="mainEntityOfPage" href="http://yuhangjob.top/iOS-视频图片压缩上传/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="阵浊秀">
@@ -356,7 +356,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">iOS AFNetworking 3.0 上传图片视频到服务器
+          <h1 class="post-title" itemprop="name headline">iOS视频图片压缩上传
               
             
           </h1>
@@ -381,7 +381,7 @@
                 
               
 
-              <time title="创建时间：2016-05-11 10:54:00" itemprop="dateCreated datePublished" datetime="2016-05-11T10:54:00+08:00">2016-05-11</time>
+              <time title="创建时间：2016-05-12 14:35:00" itemprop="dateCreated datePublished" datetime="2016-05-12T14:35:00+08:00">2016-05-12</time>
             
 
             
@@ -398,7 +398,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-06 17:31:14" itemprop="dateModified" datetime="2018-11-06T17:31:14+08:00">2018-11-06</time>
+                <time title="修改时间：2018-11-07 15:35:08" itemprop="dateModified" datetime="2018-11-07T15:35:08+08:00">2018-11-07</time>
               
             
           </span>
@@ -430,9 +430,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/iOS-AFNetworking-3-0-上传图片视频到服务器/#comments" itemprop="discussionUrl">
+                <a href="/iOS-视频图片压缩上传/#comments" itemprop="discussionUrl">
                 
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="iOS-AFNetworking-3-0-上传图片视频到服务器/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="iOS-视频图片压缩上传/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -467,25 +467,11 @@
       
 
       
-        <p>基于AFNetworking 3.0图片上传的封装</p>
+        <p>iOS视频图片压缩上传</p>
 <a id="more"></a>
-<h3 id="h"><a href="#h" class="headerlink" title=".h"></a>.h</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSUInteger, ResposeStyle) &#123;</span><br><span class="line">    JSON,</span><br><span class="line">    XML,</span><br><span class="line">    Data,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">typedef NS_ENUM(NSUInteger, RequestStyle) &#123;</span><br><span class="line">    RequestJSON,</span><br><span class="line">    RequestString,</span><br><span class="line">    RequestDefault</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="m"><a href="#m" class="headerlink" title=".m"></a>.m</h3><ul>
-<li>@param url        服务器地址</li>
-<li>@param parameters 字典 token</li>
-<li>@param fileData   要上传的数据</li>
-<li>@param name       服务器参数名称 后台给你</li>
-<li>@param fileName   文件名称 图片:xxx.jpg,xxx.png     视频:video.mov</li>
-<li>@param mimeType   文件类型 图片:image/jpg,image/png 视频:video/quicktime</li>
-<li>@param style      返回的数据类型</li>
-<li>@param progress</li>
-<li>@param success</li>
-<li>@param failure</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">+ (void)upLoadToUrlString:(NSString *)url parameters:(NSDictionary *)parameters fileData:(NSData *)fileData name:(NSString *)name fileName:(NSString *)fileName mimeType:(NSString *)mimeType response:(ResposeStyle)style</span><br><span class="line"> progress:(void (^)(NSProgress *))progress success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)(NSURLSessionDataTask *, NSError *))failure &#123;</span><br><span class="line">    </span><br><span class="line">    //1.获取单例的网络管理对象</span><br><span class="line"></span><br><span class="line">    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];</span><br><span class="line"></span><br><span class="line">   //2.根据style 的类型 去选择返回值得类型</span><br><span class="line"></span><br><span class="line">    switch (style) &#123;</span><br><span class="line">        <span class="keyword">case</span> JSON:</span><br><span class="line">            manager.responseSerializer = [AFJSONResponseSerializer serializer];</span><br><span class="line">            <span class="built_in">break</span>;</span><br><span class="line">        <span class="keyword">case</span> XML:</span><br><span class="line">            manager.responseSerializer = [AFXMLParserResponseSerializer serializer];</span><br><span class="line">            <span class="built_in">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Data:</span><br><span class="line">            manager.responseSerializer = [AFHTTPResponseSerializer serializer];</span><br><span class="line">            <span class="built_in">break</span>;</span><br><span class="line">        default:</span><br><span class="line">            <span class="built_in">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //3.设置相应数据支持的类型</span><br><span class="line">    [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@<span class="string">"application/json"</span>, @<span class="string">"text/json"</span>, @<span class="string">"text/javascript"</span>,@<span class="string">"text/html"</span>,@<span class="string">"text/css"</span>,@<span class="string">"text/plain"</span>, @<span class="string">"application/javascript"</span>,@<span class="string">"application/json"</span>, @<span class="string">"application/x-www-form-urlencoded"</span>, nil]];</span><br><span class="line">    </span><br><span class="line">    [manager POST:url parameters:parameters constructingBodyWithBlock:^(id&lt;AFMultipartFormData&gt;  _Nonnull formData) &#123;</span><br><span class="line">        </span><br><span class="line">        [formData appendPartWithFileData:fileData name:name fileName:fileName mimeType:mimeType];</span><br><span class="line">      </span><br><span class="line">    &#125; progress:^(NSProgress * _Nonnull uploadProgress) &#123;</span><br><span class="line">        </span><br><span class="line">    &#125; success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (success) &#123;</span><br><span class="line">            success(task, responseObject);</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">    &#125; failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (failure) &#123;</span><br><span class="line">            failure(task, error);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>PS:上传图片前，必须先压缩图片，不然图片过大，可能会导致上传失败！</p>
-<p>具体上传操作:<a href="http://www.jianshu.com/p/29585a416af2" target="_blank" rel="noopener">传送门</a></p>
-
+<p>上传方法：<a href="http://www.jianshu.com/p/a89b1821162a" target="_blank" rel="noopener">http://www.jianshu.com/p/a89b1821162a</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#pragma mark - 获取当前时间</span></span><br><span class="line">- (NSString *)getCurrentTime&#123;</span><br><span class="line">    </span><br><span class="line">    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];</span><br><span class="line">    [formatter setDateFormat:@<span class="string">"yyyy-MM-dd HH:mm:ss"</span>];</span><br><span class="line">    NSString *dateTime = [formatter stringFromDate:[NSDate date]];</span><br><span class="line">//    NSString *str = [NSString stringWithFormat:@<span class="string">"%@mdxx"</span>,dateTime];</span><br><span class="line">//    NSString *tokenStr = [str stringToMD5:str];</span><br><span class="line">    <span class="built_in">return</span> dateTime;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#pragma mark - 视频压缩</span></span><br><span class="line">/**</span><br><span class="line"> *  视频压缩</span><br><span class="line"> *</span><br><span class="line"> *  @param url 视频文件的url</span><br><span class="line"> *</span><br><span class="line"> *  @<span class="built_in">return</span> 压缩后的url</span><br><span class="line"> */</span><br><span class="line"> </span><br><span class="line">- (NSURL *)condenseVideoNewUrl: (NSURL *)url&#123;</span><br><span class="line">    // 沙盒目录</span><br><span class="line">    NSString *docuPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];</span><br><span class="line">    NSString *destFilePath = [docuPath stringByAppendingPathComponent:[NSString stringWithFormat:@<span class="string">"lyh%@.MOV"</span>,[self getCurrentTime]]];</span><br><span class="line">    NSURL *destUrl = [NSURL fileURLWithPath:destFilePath];</span><br><span class="line">    //将视频文件copy到沙盒目录中</span><br><span class="line">    NSFileManager *manager = [NSFileManager defaultManager];</span><br><span class="line">    NSError *error = nil;</span><br><span class="line">    [manager copyItemAtURL:url toURL:destUrl error:&amp;error];</span><br><span class="line">    NSLog(@<span class="string">"压缩前--%.2fk"</span>,[self getFileSize:destFilePath]);</span><br><span class="line">    // 播放视频</span><br><span class="line">    /*</span><br><span class="line">    NSURL *videoURL = [NSURL fileURLWithPath:destFilePath];</span><br><span class="line">    AVPlayer *player = [AVPlayer playerWithURL:videoURL];</span><br><span class="line">    AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:player];</span><br><span class="line">    playerLayer.frame = self.view.bounds;</span><br><span class="line">    [self.view.layer addSublayer:playerLayer];</span><br><span class="line">    [player play];</span><br><span class="line">    */</span><br><span class="line">    // 进行压缩</span><br><span class="line">    AVAsset *asset = [AVAsset assetWithURL:destUrl];</span><br><span class="line">    //创建视频资源导出会话</span><br><span class="line">    /**</span><br><span class="line">     NSString *const AVAssetExportPresetLowQuality; // 低质量</span><br><span class="line">     NSString *const AVAssetExportPresetMediumQuality;</span><br><span class="line">     NSString *const AVAssetExportPresetHighestQuality; //高质量</span><br><span class="line">     */</span><br><span class="line">    </span><br><span class="line">    AVAssetExportSession *session = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetLowQuality];</span><br><span class="line">    // 创建导出的url</span><br><span class="line">    NSString *resultPath = [docuPath stringByAppendingPathComponent:[NSString stringWithFormat:@<span class="string">"lyhg%@.MOV"</span>,[self getCurrentTime]]];</span><br><span class="line">    session.outputURL = [NSURL fileURLWithPath:resultPath];</span><br><span class="line">    // 必须配置输出属性</span><br><span class="line">    session.outputFileType = @<span class="string">"com.apple.quicktime-movie"</span>;</span><br><span class="line">    // 导出视频</span><br><span class="line">    [session exportAsynchronouslyWithCompletionHandler:^&#123;</span><br><span class="line">        NSLog(@<span class="string">"压缩后---%.2fk"</span>,[self getFileSize:resultPath]);</span><br><span class="line">        NSLog(@<span class="string">"视频导出完成"</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">return</span> session.outputURL;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 获取视频的大小</span><br><span class="line">- (CGFloat) getFileSize:(NSString *)path</span><br><span class="line">&#123;</span><br><span class="line">    NSFileManager *fileManager = [[NSFileManager alloc] init] ;</span><br><span class="line">    <span class="built_in">float</span> filesize = -1.0;</span><br><span class="line">    <span class="keyword">if</span> ([fileManager fileExistsAtPath:path]) &#123;</span><br><span class="line">        NSDictionary *fileDic = [fileManager attributesOfItemAtPath:path error:nil];//获取文件的属性</span><br><span class="line">        unsigned long long size = [[fileDic objectForKey:NSFileSize] longLongValue];</span><br><span class="line">        filesize = 1.0*size/1024;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> filesize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#pragma mark - Picker delgate</span></span><br><span class="line">- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary&lt;NSString *,id&gt; *)info &#123;</span><br><span class="line">    </span><br><span class="line">    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];</span><br><span class="line">    <span class="keyword">if</span> ([mediaType isEqualToString:(NSString *)kUTTypeImage]) &#123;</span><br><span class="line">        NSLog(@<span class="string">"选取的是照片"</span>);</span><br><span class="line">        //        self.imageView.image = info[UIImagePickerControllerEditedImage];</span><br><span class="line">        // 压缩图片</span><br><span class="line">        NSData *fileData = UIImageJPEGRepresentation(info[UIImagePickerControllerEditedImage], 0.5);</span><br><span class="line">        //保存到Documents</span><br><span class="line">        NSString *imageStr = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];</span><br><span class="line">        </span><br><span class="line">        NSString *imageFile = [imageStr stringByAppendingPathComponent:@<span class="string">"image.jpg"</span>];</span><br><span class="line">        NSLog(@<span class="string">"%@"</span>,imageFile);</span><br><span class="line">        [fileData writeToFile:imageFile atomically:YES];</span><br><span class="line">        </span><br><span class="line">        //保存至相册</span><br><span class="line">        UIImageWriteToSavedPhotosAlbum(info[UIImagePickerControllerEditedImage], self, @selector(image:didFinishSavingWithError:contextInfo:), nil);</span><br><span class="line">        </span><br><span class="line">        // 上传图片</span><br><span class="line">        NSDictionary *dict = @&#123;@<span class="string">"mem_id"</span>:@<span class="string">"600209"</span>&#125;;</span><br><span class="line">        [AFNetworkTool upLoadToUrlString:@<span class="string">"http://www.baidu.com"</span> parameters:dict fileData:fileData name:@<span class="string">"photo"</span> fileName:@<span class="string">"abc.jpg"</span> mimeType:@<span class="string">"image/jpeg"</span> response:JSON progress:^(NSProgress *uploadProgress) &#123;</span><br><span class="line">            </span><br><span class="line">        &#125; success:^(NSURLSessionDataTask *task, id responseObject) &#123;</span><br><span class="line">            </span><br><span class="line">            NSLog(@<span class="string">"success:%@ %@"</span>,responseObject, [responseObject objectForKey:@<span class="string">"msg"</span>]);</span><br><span class="line">            </span><br><span class="line">        &#125; failure:^(NSURLSessionDataTask *task, NSError *error) &#123;</span><br><span class="line">            </span><br><span class="line">            NSLog(@<span class="string">"%@"</span>,error);</span><br><span class="line">            </span><br><span class="line">        &#125;];</span><br><span class="line">        </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        // 如果是视频</span><br><span class="line">        NSURL *url = info[UIImagePickerControllerMediaURL];</span><br><span class="line">       // 获取视频总时长</span><br><span class="line">        CGFloat lengthTime = [self getVideoLength:url];</span><br><span class="line">        NSLog(@<span class="string">"%f"</span>,lengthTime);</span><br><span class="line">        // 保存视频至相册 (异步线程)</span><br><span class="line">        NSString *urlStr = [url path];</span><br><span class="line">        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(urlStr)) &#123;</span><br><span class="line">                </span><br><span class="line">                UISaveVideoAtPathToSavedPhotosAlbum(urlStr, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;);</span><br><span class="line">        </span><br><span class="line">        //压缩视频</span><br><span class="line">        NSData *videoData = [NSData dataWithContentsOfURL:[self condenseVideoNewUrl:url]];</span><br><span class="line">      </span><br><span class="line">        //视频上传</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (lengthTime &gt;10.0f) &#123;</span><br><span class="line">            NSLog(@<span class="string">"文件过大只允许上传10s视频"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            NSDictionary *dict = @&#123;@<span class="string">"username"</span>:@<span class="string">"syl"</span>&#125;;</span><br><span class="line">            </span><br><span class="line">            [AFNetworkTool upLoadToUrlString:@<span class="string">"http://www.baidu.com"</span> parameters:dict fileData:videoData name:@<span class="string">"file"</span> fileName:@<span class="string">"video.mov"</span> mimeType:@<span class="string">"video/quicktime"</span> response:JSON progress:^(NSProgress *uploadProgress) &#123;</span><br><span class="line">                </span><br><span class="line">            &#125; success:^(NSURLSessionDataTask *task, id responseObject) &#123;</span><br><span class="line">                </span><br><span class="line">                NSLog(@<span class="string">"上传成功%@"</span>,responseObject);</span><br><span class="line">                </span><br><span class="line">                </span><br><span class="line">            &#125; failure:^(NSURLSessionDataTask *task, NSError *error) &#123;</span><br><span class="line">                </span><br><span class="line">                NSLog(@<span class="string">"%@"</span>,error);</span><br><span class="line">                </span><br><span class="line">            &#125;];</span><br><span class="line">        </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    [self dismissViewControllerAnimated:YES completion:nil];</span><br><span class="line">&#125;</span><br><span class="line">// 获取视频时间</span><br><span class="line">- (CGFloat) getVideoLength:(NSURL *)URL</span><br><span class="line">&#123;</span><br><span class="line">    AVURLAsset *avUrl = [AVURLAsset assetWithURL:URL];</span><br><span class="line">    CMTime time = [avUrl duration];</span><br><span class="line">    int second = ceil(time.value/time.timescale);</span><br><span class="line">    <span class="built_in">return</span> second;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#pragma mark 图片保存完毕的回调</span></span><br><span class="line">- (void) image: (UIImage *) image didFinishSavingWithError:(NSError *) error contextInfo: (void *)contextIn &#123;</span><br><span class="line">    NSLog(@<span class="string">"照片保存成功"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#pragma mark 视频保存完毕的回调</span></span><br><span class="line">- (void)video:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextIn &#123;</span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">        NSLog(@<span class="string">"保存视频过程中发生错误，错误信息:%@"</span>,error.localizedDescription);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        NSLog(@<span class="string">"视频保存成功."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -518,8 +504,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/iOS-WKWebView添加类似微信的进度条/" rel="next" title="iOS WKWebView添加类似微信的进度条">
-                <i class="fa fa-chevron-left"></i> iOS WKWebView添加类似微信的进度条
+              <a href="/iOS-AFNetworking-3-0-上传图片视频到服务器/" rel="next" title="iOS AFNetworking 3.0 上传图片视频到服务器">
+                <i class="fa fa-chevron-left"></i> iOS AFNetworking 3.0 上传图片视频到服务器
               </a>
             
           </div>
@@ -528,8 +514,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/iOS-视频图片压缩上传/" rel="prev" title="iOS视频图片压缩上传">
-                iOS视频图片压缩上传 <i class="fa fa-chevron-right"></i>
+              <a href="/code-push和code-push-server热更新上传到七牛云及阿里云/" rel="prev" title="code-push和code-push-server热更新上传到七牛云及阿里云">
+                code-push和code-push-server热更新上传到七牛云及阿里云 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -585,17 +571,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -686,22 +663,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#h"><span class="nav-number">1.</span> <span class="nav-text">.h</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#m"><span class="nav-number">2.</span> <span class="nav-text">.m</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -893,9 +854,9 @@
   
     <script type="text/javascript">
       var disqus_config = function () {
-        this.page.url = 'http://yuhangjob.top/iOS-AFNetworking-3-0-上传图片视频到服务器/';
-        this.page.identifier = 'iOS-AFNetworking-3-0-上传图片视频到服务器/';
-        this.page.title = 'iOS AFNetworking 3.0 上传图片视频到服务器';
+        this.page.url = 'http://yuhangjob.top/iOS-视频图片压缩上传/';
+        this.page.identifier = 'iOS-视频图片压缩上传/';
+        this.page.title = 'iOS视频图片压缩上传';
         };
       function loadComments () {
         var d = document, s = d.createElement('script');
