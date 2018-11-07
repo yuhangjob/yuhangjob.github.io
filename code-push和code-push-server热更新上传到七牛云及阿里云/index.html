@@ -450,7 +450,8 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/code-push和code-push-server热更新上传到七牛云及阿里云/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/code-push和code-push-server热更新上传到七牛云及阿里云/" itemprop="commentsCount"></span>
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="code-push和code-push-server热更新上传到七牛云及阿里云/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -632,10 +633,12 @@
 
   
     <div class="comments" id="comments">
-      
-        <div onclick="showGitment()" id="gitment-display-button">显示 Gitment 评论</div>
-        <div id="gitment-container" style="display:none"></div>
-      
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     </div>
 
   
@@ -962,8 +965,27 @@
 
   
 
+  
+    <script id="dsq-count-scr" src="https://yuhangjob.disqus.com/count.js" async></script>
+  
 
-
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'http://yuhangjob.top/code-push和code-push-server热更新上传到七牛云及阿里云/';
+        this.page.identifier = 'code-push和code-push-server热更新上传到七牛云及阿里云/';
+        this.page.title = 'code-push和code-push-server热更新上传到七牛云及阿里云';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://yuhangjob.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
   
 
 
@@ -971,45 +993,7 @@
 
 
 
-<!-- LOCAL: You can save these files to your site and update links -->
-    
-        
-        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
-        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
-    
-<!-- END LOCAL -->
 
-    
-
-    
-      <script type="text/javascript">
-      function renderGitment(){
-        var gitment = new Gitmint({
-            id: window.location.pathname,
-            owner: 'yuhangjob',
-            repo: 'yuhangjobcommit',
-            
-            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
-            
-            oauth: {
-            
-            
-                client_secret: 'aebca5d440643c16b39fcc8ff8632cdf29c39dce',
-            
-                client_id: 'd31380f861d22b666991'
-            }});
-        gitment.render('gitment-container');
-      }
-
-      
-      function showGitment(){
-        document.getElementById("gitment-display-button").style.display = "none";
-        document.getElementById("gitment-container").style.display = "block";
-        renderGitment();
-      }
-      
-      </script>
-    
 
 
 
