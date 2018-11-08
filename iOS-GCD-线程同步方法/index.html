@@ -115,20 +115,27 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="YH&#39;S Develop Blog">
-<meta property="og:url" content="http://yuhangjob.top/archives/index.html">
+  <meta name="description" content="我们使用GCD的时候如何让线程同步，目前我能想到的就三种 dispatch_group dispatch_barrier dispatch_semaphore">
+<meta name="keywords" content="多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS GCD 线程同步方法">
+<meta property="og:url" content="http://yuhangjob.top/iOS-GCD-线程同步方法/index.html">
 <meta property="og:site_name" content="YH&#39;S Develop Blog">
+<meta property="og:description" content="我们使用GCD的时候如何让线程同步，目前我能想到的就三种 dispatch_group dispatch_barrier dispatch_semaphore">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1319536-4cf4de24c29043bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-04-14T07:15:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="YH&#39;S Develop Blog">
+<meta name="twitter:title" content="iOS GCD 线程同步方法">
+<meta name="twitter:description" content="我们使用GCD的时候如何让线程同步，目前我能想到的就三种 dispatch_group dispatch_barrier dispatch_semaphore">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1319536-4cf4de24c29043bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yuhangjob.top/archives/">
+  <link rel="canonical" href="http://yuhangjob.top/iOS-GCD-线程同步方法/">
 
 
 
@@ -138,7 +145,7 @@
   };
 </script>
 
-  <title>归档 | YH'S Develop Blog</title>
+  <title>iOS GCD 线程同步方法 | YH'S Develop Blog</title>
   
 
 
@@ -187,7 +194,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -252,7 +259,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
   </li>
@@ -314,425 +321,244 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      
-      <span class="archive-page-counter">
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuhangjob.top/iOS-GCD-线程同步方法/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="阵浊秀">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YH'S Develop Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">iOS GCD 线程同步方法
+              
+            
+          </h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-04-14 15:15:35" itemprop="dateCreated datePublished" datetime="2016-04-14T15:15:35+08:00">2016-04-14</time>
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 15 篇日志。 继续努力。
-      </span>
-      
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/iOS开发记录/" itemprop="url" rel="index"><span itemprop="name">iOS开发记录</span></a></span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/code-push和code-push-server热更新上传到七牛云及阿里云/" itemprop="url">
-              
-                <span itemprop="name">code-push和code-push-server热更新上传到七牛云及阿里云</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-06-07T00:00:00+08:00" content="2018-06-07">
-          06-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2016">2016</h1>
-          </div>
-        
-        
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/iOS-GCD-线程同步方法/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="iOS-GCD-线程同步方法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
 
-        
+          
+          
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Swift-类似网易新闻的滑动菜单/" itemprop="url">
-              
-                <span itemprop="name">Swift 类似网易新闻的滑动菜单</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2016-06-23T17:17:00+08:00" content="2016-06-23">
-          06-23
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+        </div>
+      </header>
+    
 
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Swift-tableViewCell-高度自适应/" itemprop="url">
-              
-                <span itemprop="name">Swift tableViewCell 高度自适应</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2016-06-23T16:47:00+08:00" content="2016-06-23">
-          06-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/iOS-视频图片压缩上传/" itemprop="url">
-              
-                <span itemprop="name">iOS视频图片压缩上传</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2016-05-12T14:35:00+08:00" content="2016-05-12">
-          05-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/iOS-AFNetworking-3-0-上传图片视频到服务器/" itemprop="url">
-              
-                <span itemprop="name">iOS AFNetworking 3.0 上传图片视频到服务器</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2016-05-11T10:54:00+08:00" content="2016-05-11">
-          05-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/iOS-WKWebView添加类似微信的进度条/" itemprop="url">
-              
-                <span itemprop="name">iOS WKWebView添加类似微信的进度条</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2016-05-11T10:35:00+08:00" content="2016-05-11">
-          05-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
+        <h1 id="我们使用GCD的时候如何让线程同步，目前我能想到的就三种"><a href="#我们使用GCD的时候如何让线程同步，目前我能想到的就三种" class="headerlink" title="我们使用GCD的时候如何让线程同步，目前我能想到的就三种"></a>我们使用GCD的时候如何让线程同步，目前我能想到的就三种</h1><ul>
+<li>dispatch_group</li>
+<li>dispatch_barrier</li>
+<li>dispatch_semaphore<a id="more"></a>
+</li>
+</ul>
+<h2 id="dispatch-group-线程组"><a href="#dispatch-group-线程组" class="headerlink" title="dispatch_group 线程组"></a>dispatch_group 线程组</h2><p>线程组，是一种同步机制，可以让某些线程先执行，某些线程最后执行，以控制线程的执行顺序。</p>
+<p>有这么一个需要，分别执行2个耗时的异步操作，等2个异步操作都执行完毕后在回到主线程执行操作。如果想要快速高效地实现这个需求，可以考虑使用线程组。 线程组的创建代码如下：</p>
+<h4 id="创建dispatch-group-t"><a href="#创建dispatch-group-t" class="headerlink" title="创建dispatch_group_t"></a>创建dispatch_group_t</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dispatch_group_t group = dispatch_group_create();</span><br></pre></td></tr></table></figure>
+<h4 id="往线程组里面添加任务的函数如下"><a href="#往线程组里面添加任务的函数如下" class="headerlink" title="往线程组里面添加任务的函数如下"></a>往线程组里面添加任务的函数如下</h4><p>自己创建队列：使用<code>dispatch_group_async</code>。</p>
+<p>无法直接使用队列变量（如使用AFNetworking添加异步任务）：使用<strong>dispatch_group_enter</strong>，<strong>dispatch_group_leave</strong><br>调用了dispatch_group_enter(dispatch_group_t group)<br>之后,必须有与之对应的dispatch_group_leave(dispatch_group_t group)<br>才行</p>
+<p>第一种:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">group 负责监控任务，queue 负责调度任务</span><br><span class="line"> dispatch_group_async(group, dispatch_get_global_queue(0, 0), ^&#123;  </span><br><span class="line">     i = 1;  </span><br><span class="line"> &#125;);  </span><br><span class="line">  </span><br><span class="line"> dispatch_group_async(group, dispatch_get_global_queue(0, 0), ^&#123;  </span><br><span class="line">     j = 2;  </span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+<p>第二种:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];</span><br><span class="line"></span><br><span class="line">//Enter group</span><br><span class="line">dispatch_group_enter(group);</span><br><span class="line">[manager GET:@<span class="string">"http://www.baidu.com"</span> parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) &#123;</span><br><span class="line">    //Deal with result...</span><br><span class="line"></span><br><span class="line">    //Leave group</span><br><span class="line">    dispatch_group_leave(group);</span><br><span class="line">&#125;    failure:^(AFHTTPRequestOperation *operation, NSError *error) &#123;</span><br><span class="line">    //Deal with error...</span><br><span class="line"></span><br><span class="line">    //Leave group</span><br><span class="line">    dispatch_group_leave(group);</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">//More request...</span><br></pre></td></tr></table></figure>
+<h4 id="监听所有任务完成-－-等到-group-中的所有任务执行完毕后，”由队列调度-block-中的任务异步执行”"><a href="#监听所有任务完成-－-等到-group-中的所有任务执行完毕后，”由队列调度-block-中的任务异步执行”" class="headerlink" title="监听所有任务完成 － 等到 group 中的所有任务执行完毕后，”由队列调度 block 中的任务异步执行”"></a>监听所有任务完成 － 等到 group 中的所有任务执行完毕后，”由队列调度 block 中的任务异步执行”</h4><p>在当前线程<strong>阻塞的同步等待</strong>：<code>dispatch_group_wait</code>。<br>添加一个异步执行的任务作为结束任务：<code>dispatch_group_notify</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> dispatch_group_notify(group, dispatch_get_global_queue(0, 0), ^&#123;  </span><br><span class="line">     NSLog(@<span class="string">"%d"</span>,i+j);  </span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+<p>适用于后台批量下载 结束后主线程统一刷新UI</p>
+<h2 id="dispatch-barrier-栅栏块"><a href="#dispatch-barrier-栅栏块" class="headerlink" title="dispatch_barrier 栅栏块"></a>dispatch_barrier 栅栏块</h2><blockquote>
+<p>dispatch_barrier_async,对于同一个队列中的不同任务而言，在dispatch_barrier_async之前的先执行，在dispatch_barrier_async后面的后执行 .</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">_syncQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line"></span><br><span class="line">- (NSString *)someString</span><br><span class="line">&#123;</span><br><span class="line"> __weak NSString *localSomeString;</span><br><span class="line"></span><br><span class="line"> dispatch_sync(_syncQueue, ^&#123;</span><br><span class="line"></span><br><span class="line"> localSomeString = _someString;</span><br><span class="line"></span><br><span class="line"> &#125;);</span><br><span class="line"></span><br><span class="line"> <span class="built_in">return</span> localSomeString;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">- (void)setSomeString:(NSString *)someString</span><br><span class="line">&#123;</span><br><span class="line"> // barrier</span><br><span class="line"> dispatch_barrier_async(_syncQueue, ^&#123;</span><br><span class="line"></span><br><span class="line"> _someString = someString;</span><br><span class="line"></span><br><span class="line"> &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>函数<code>dispatch_barrier_sync</code>和 <code>dispatch_barrier_async</code><br> 可以让队列中派发的 block 变成 barrier（栅栏） 使用，这种 block 称为 barrier block。队列中的 barrier block 必须等当前并发队列中的 block 都执行结束才开始执行，时序图如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1319536-4cf4de24c29043bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image_note64272_1.png"></p>
+<p>在这个并发队列中,读取操作是用普通的块来实现的,而写入操作则是用栅栏块来实现的,读取操作可以并行,但写入操作必须单独执行,因为他是栅栏快.<br>注意dispatch_barrier_async的同步控制和线程组、信号量的同步机制是不一样的，dispatch_barrier_async是对于同一个队列中的不同任务而言的，线程组和信号量是对于不同线程而言的。</p>
+<h2 id="dispatch-semaphore-信号量"><a href="#dispatch-semaphore-信号量" class="headerlink" title="dispatch_semaphore 信号量"></a>dispatch_semaphore 信号量</h2><p> 创建一个信号量。参数指定信号量的起始值。这个数字是你可以访问的信号量，不需要先去增加它的数量（增加信号量也叫作发射信号量）。<br> 初始value = 0时，信号量–，小于0，wait线程阻塞。然后执行signal，信号量++，激活wait线程。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">    dispatch_semaphore_t sema = dispatch_semaphore_create(0);</span><br><span class="line">    </span><br><span class="line">    dispatch_async(dispatch_get_global_queue(0, 0), ^&#123;</span><br><span class="line">        </span><br><span class="line">        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);</span><br><span class="line">    </span><br><span class="line">        NSLog(@<span class="string">"等你"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    dispatch_async(dispatch_get_global_queue(0, 0), ^&#123;</span><br><span class="line">       </span><br><span class="line">        NSLog(@<span class="string">"发送信号"</span>);</span><br><span class="line">        [NSThread sleepForTimeInterval:5];</span><br><span class="line">        dispatch_semaphore_signal(sema);</span><br><span class="line">        </span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/iOS-GCD-线程同步方法/" itemprop="url">
-              
-                <span itemprop="name">iOS GCD 线程同步方法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2016-04-14T15:15:35+08:00" content="2016-04-14">
-          04-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/iOS-GCD-的使用技巧/" itemprop="url">
-              
-                <span itemprop="name">iOS GCD 的使用技巧</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2016-04-12T15:15:35+08:00" content="2016-04-12">
-          04-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/iOS-GCD-的简单使用-基础/" itemprop="url">
-              
-                <span itemprop="name">iOS GCD 的简单使用(基础)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2016-04-10T14:20:38+08:00" content="2016-04-10">
-          04-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/iOS的三种多线程技术/" itemprop="url">
-              
-                <span itemprop="name">iOS的三种多线程技术</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2016-04-08T13:44:29+08:00" content="2016-04-08">
-          04-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多线程/" rel="tag"># 多线程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/iOS-GCD-的使用技巧/" rel="next" title="iOS GCD 的使用技巧">
+                <i class="fa fa-chevron-left"></i> iOS GCD 的使用技巧
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/iOS-WKWebView添加类似微信的进度条/" rel="prev" title="iOS WKWebView添加类似微信的进度条">
+                iOS WKWebView添加类似微信的进度条 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
+  </article>
 
 
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -753,8 +579,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -857,6 +692,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#我们使用GCD的时候如何让线程同步，目前我能想到的就三种"><span class="nav-number">1.</span> <span class="nav-text">我们使用GCD的时候如何让线程同步，目前我能想到的就三种</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dispatch-group-线程组"><span class="nav-number">1.1.</span> <span class="nav-text">dispatch_group 线程组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建dispatch-group-t"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">创建dispatch_group_t</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#往线程组里面添加任务的函数如下"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">往线程组里面添加任务的函数如下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#监听所有任务完成-－-等到-group-中的所有任务执行完毕后，”由队列调度-block-中的任务异步执行”"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">监听所有任务完成 － 等到 group 中的所有任务执行完毕后，”由队列调度 block 中的任务异步执行”</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dispatch-barrier-栅栏块"><span class="nav-number">1.2.</span> <span class="nav-text">dispatch_barrier 栅栏块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dispatch-semaphore-信号量"><span class="nav-number">1.3.</span> <span class="nav-text">dispatch_semaphore 信号量</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1027,6 +878,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
 
   
 
@@ -1041,6 +896,23 @@
     <script id="dsq-count-scr" src="https://yuhangjob.disqus.com/count.js" async></script>
   
 
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'http://yuhangjob.top/iOS-GCD-线程同步方法/';
+        this.page.identifier = 'iOS-GCD-线程同步方法/';
+        this.page.title = 'iOS GCD 线程同步方法';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://yuhangjob.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
   
 
 

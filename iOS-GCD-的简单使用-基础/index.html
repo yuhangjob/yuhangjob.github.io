@@ -115,25 +115,33 @@
 
 
 
-  <meta name="description" content="iOS8之后用UIAlertController代替了UIAlertView,所以每次有需要弹窗的时候,都需要先判断系统,最近在做的项目中弹窗较多,如果每次都判断,真是太麻烦了,索性对UIAlertController和UIAlertView进行的封装了,封装在一个工具类中,在工具类中就对系统进行判断,然后在你需要弹窗的界面直接调用这个工具类的方法就可以了,减少了代码的耦合. 这个工具类其实也封装">
-<meta name="keywords" content="Object-C">
+  <meta name="description" content="前言在iOS开发中，苹果提供了三种多线程技术，分别是：  NSThread NSOperation GCD  简单介绍一下GCD的使用。GCD全称 Grand Central Dispatch，可以称之为大中央调度。实际上GCD是管理着一个线程池，如何创建线程，如何回收线程，以及分配多少个线程，这些都是GCD来控制的。在开发中，程序员是不用操作线程的相关事情，程序员只需要把应该做的操作放到相应的队">
+<meta name="keywords" content="多线程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="实现对UIAlertController和UIAlertView判断系统后的简单封装">
-<meta property="og:url" content="http://yuhangjob.top/实现对UIAlertController和UIAlertView判断系统后的简单封装/index.html">
+<meta property="og:title" content="iOS GCD 的简单使用(基础)">
+<meta property="og:url" content="http://yuhangjob.top/iOS-GCD-的简单使用-基础/index.html">
 <meta property="og:site_name" content="YH&#39;S Develop Blog">
-<meta property="og:description" content="iOS8之后用UIAlertController代替了UIAlertView,所以每次有需要弹窗的时候,都需要先判断系统,最近在做的项目中弹窗较多,如果每次都判断,真是太麻烦了,索性对UIAlertController和UIAlertView进行的封装了,封装在一个工具类中,在工具类中就对系统进行判断,然后在你需要弹窗的界面直接调用这个工具类的方法就可以了,减少了代码的耦合. 这个工具类其实也封装">
+<meta property="og:description" content="前言在iOS开发中，苹果提供了三种多线程技术，分别是：  NSThread NSOperation GCD  简单介绍一下GCD的使用。GCD全称 Grand Central Dispatch，可以称之为大中央调度。实际上GCD是管理着一个线程池，如何创建线程，如何回收线程，以及分配多少个线程，这些都是GCD来控制的。在开发中，程序员是不用操作线程的相关事情，程序员只需要把应该做的操作放到相应的队">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2015-12-29T16:00:00.000Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1319536-ac7c7bfeb8dfa382.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1319536-2f45f3bd6cdf97de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1319536-ef1a79f67d5f7827.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1319536-aea51c1cfd279d41.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1319536-01f286808670e796.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1319536-e9bc988491d2f979.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1319536-822362f617c895ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-04-10T06:20:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="实现对UIAlertController和UIAlertView判断系统后的简单封装">
-<meta name="twitter:description" content="iOS8之后用UIAlertController代替了UIAlertView,所以每次有需要弹窗的时候,都需要先判断系统,最近在做的项目中弹窗较多,如果每次都判断,真是太麻烦了,索性对UIAlertController和UIAlertView进行的封装了,封装在一个工具类中,在工具类中就对系统进行判断,然后在你需要弹窗的界面直接调用这个工具类的方法就可以了,减少了代码的耦合. 这个工具类其实也封装">
+<meta name="twitter:title" content="iOS GCD 的简单使用(基础)">
+<meta name="twitter:description" content="前言在iOS开发中，苹果提供了三种多线程技术，分别是：  NSThread NSOperation GCD  简单介绍一下GCD的使用。GCD全称 Grand Central Dispatch，可以称之为大中央调度。实际上GCD是管理着一个线程池，如何创建线程，如何回收线程，以及分配多少个线程，这些都是GCD来控制的。在开发中，程序员是不用操作线程的相关事情，程序员只需要把应该做的操作放到相应的队">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1319536-ac7c7bfeb8dfa382.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yuhangjob.top/实现对UIAlertController和UIAlertView判断系统后的简单封装/">
+  <link rel="canonical" href="http://yuhangjob.top/iOS-GCD-的简单使用-基础/">
 
 
 
@@ -143,7 +151,7 @@
   };
 </script>
 
-  <title>实现对UIAlertController和UIAlertView判断系统后的简单封装 | YH'S Develop Blog</title>
+  <title>iOS GCD 的简单使用(基础) | YH'S Develop Blog</title>
   
 
 
@@ -339,7 +347,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuhangjob.top/实现对UIAlertController和UIAlertView判断系统后的简单封装/">
+    <link itemprop="mainEntityOfPage" href="http://yuhangjob.top/iOS-GCD-的简单使用-基础/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="阵浊秀">
@@ -356,7 +364,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">实现对UIAlertController和UIAlertView判断系统后的简单封装
+          <h1 class="post-title" itemprop="name headline">iOS GCD 的简单使用(基础)
               
             
           </h1>
@@ -381,7 +389,7 @@
                 
               
 
-              <time title="创建时间：2015-12-30 00:00:00" itemprop="dateCreated datePublished" datetime="2015-12-30T00:00:00+08:00">2015-12-30</time>
+              <time title="创建时间：2016-04-10 14:20:38" itemprop="dateCreated datePublished" datetime="2016-04-10T14:20:38+08:00">2016-04-10</time>
             
 
             
@@ -414,9 +422,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/实现对UIAlertController和UIAlertView判断系统后的简单封装/#comments" itemprop="discussionUrl">
+                <a href="/iOS-GCD-的简单使用-基础/#comments" itemprop="discussionUrl">
                 
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="实现对UIAlertController和UIAlertView判断系统后的简单封装/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="iOS-GCD-的简单使用-基础/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -451,12 +459,51 @@
       
 
       
-        <p>iOS8之后用UIAlertController代替了UIAlertView,所以每次有需要弹窗的时候,都需要先判断系统,最近在做的项目中弹窗较多,如果每次都判断,真是太麻烦了,索性对UIAlertController和UIAlertView进行的封装了,封装在一个工具类中,在工具类中就对系统进行判断,然后在你需要弹窗的界面直接调用这个工具类的方法就可以了,减少了代码的耦合.</p>
-<p>这个工具类其实也封装的特别简单,因为都是用的系统的,分享出来给大家参考下:</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在iOS开发中，苹果提供了三种多线程技术，分别是：</p>
+<ul>
+<li>NSThread</li>
+<li>NSOperation</li>
+<li>GCD</li>
+</ul>
+<p>简单介绍一下GCD的使用。<br>GCD全称 Grand Central Dispatch，可以称之为大中央调度。实际上GCD是管理着一个线程池，如何创建线程，如何回收线程，以及分配多少个线程，这些都是GCD来控制的。在开发中，程序员是不用操作线程的相关事情，程序员只需要把应该做的操作放到相应的队列里面即可。</p>
 <a id="more"></a>
-<h2 id="首先是-h文件"><a href="#首先是-h文件" class="headerlink" title="首先是.h文件"></a>首先是.h文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[objc] view plaincopy</span><br><span class="line"></span><br><span class="line">@interface UIAlertTool : NSObject</span><br><span class="line">-(void)showAlertView:(UIViewController *)viewController :(NSString *)title :(NSString *)message :(NSString *)cancelButtonTitle :(NSString *)otherButtonTitle :(void (^)())confirm :(void (^)())cancle;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
-<p>只有这么一个简单的方法  把你需要在弹窗中显示的内容以参数的形式传入就可以了</p>
-<h2 id="然后是-m文件的实现"><a href="#然后是-m文件的实现" class="headerlink" title="然后是.m文件的实现"></a>然后是.m文件的实现</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">[objc] view plaincopy</span><br><span class="line"></span><br><span class="line"><span class="comment">#define IAIOS8 ([[[UIDevice currentDevice] systemVersion] floatValue] &gt;= 8.0)</span></span><br><span class="line"><span class="comment">#import "UIAlertTool.h"</span></span><br><span class="line">typedef void (^confirm)();</span><br><span class="line">typedef void (^cancle)();</span><br><span class="line">@interface <span class="function"><span class="title">UIAlertTool</span></span>()&#123;</span><br><span class="line">    confirm confirmParam;</span><br><span class="line">    cancle  cancleParam;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation UIAlertTool</span><br><span class="line"></span><br><span class="line">-(void)showAlertView:(UIViewController *)viewController :(NSString *)title :(NSString *)message :(NSString *)cancelButtonTitle :(NSString *)otherButtonTitle :(void (^)())confirm :(void (^)())cancle&#123;</span><br><span class="line">    confirmParam=confirm;</span><br><span class="line">    cancleParam=cancle;</span><br><span class="line">    <span class="keyword">if</span> (IAIOS8) &#123;</span><br><span class="line">        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line"></span><br><span class="line">         // Create the actions.</span><br><span class="line">         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) &#123;</span><br><span class="line">             cancle();</span><br><span class="line"></span><br><span class="line">        &#125;];</span><br><span class="line"></span><br><span class="line">        UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) &#123;</span><br><span class="line">            confirm();</span><br><span class="line">        &#125;];</span><br><span class="line"></span><br><span class="line">        // Add the actions.</span><br><span class="line">        [alertController addAction:cancelAction];</span><br><span class="line">        [alertController addAction:otherAction];</span><br><span class="line"></span><br><span class="line">        [viewController presentViewController:alertController animated:YES completion:nil];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        UIAlertView *TitleAlert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:otherButtonTitle otherButtonTitles:cancelButtonTitle,nil];</span><br><span class="line">        [TitleAlert show];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex&#123;</span><br><span class="line">    <span class="keyword">if</span> (buttonIndex==0) &#123;</span><br><span class="line">        confirmParam();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        cancleParam();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h2 id="自定义队列"><a href="#自定义队列" class="headerlink" title="自定义队列"></a>自定义队列</h2><p>GCD中有多种队列，其中自定义的队列有两种：串行队列和并行队列</p>
+<pre><code>串行队列：队列中的任务只会顺序执行，且一次只能够执行一个任务。也就是说，执行完一个任务后，才会执行下一个任务。
+
+并行队列：可以一次执行多个任务。比如说并行队列中有10个任务，可以一次执行3个任务，这三个任务哪个先执行完了，再接着执行剩下的任务。
+</code></pre><p>注意：无论是串行队列还是并行队列，他们都是FIFO（先进先出）的。也就是说，无论是哪种队列，任务进队列的时间越早，其执行的时间就越早（只不过某些情况下任务执行的结束时间是不确定的）。</p>
+<p>GCD中有两种操作，分别是同步操作和异步操作</p>
+<pre><code>同步操作：不会新开线程
+异步操作：会开启新的线程
+</code></pre><p>两种操作和两种队列，组合为4种情况，实际上，在开发中，有些组合基本上是不会用到的。下面用程序描述一下四种组合。</p>
+<h3 id="串行队列-同步操作-不会新建线程，而且任务是一个一个的执行，因此实际上就是顺序执行），代码如下："><a href="#串行队列-同步操作-不会新建线程，而且任务是一个一个的执行，因此实际上就是顺序执行），代码如下：" class="headerlink" title="串行队列 + 同步操作 (不会新建线程，而且任务是一个一个的执行，因此实际上就是顺序执行），代码如下："></a>串行队列 + 同步操作 (不会新建线程，而且任务是一个一个的执行，因此实际上就是顺序执行），代码如下：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (void)serialAndSync &#123;</span><br><span class="line">    </span><br><span class="line">    dispatch_queue_t queue = dispatch_queue_create(<span class="string">"serialSync"</span>, DISPATCH_QUEUE_SERIAL);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">        dispatch_sync(queue, ^&#123;</span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">            NSLog(@<span class="string">"%@ -- %d"</span>,[NSThread currentThread],i);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果:<br><img src="http://upload-images.jianshu.io/upload_images/1319536-ac7c7bfeb8dfa382.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="串行同步.png"><br>number = 1,说明是主线程，没有新开线程。</p>
+<h3 id="串行队列-异步操作（因为任务要一个一个的执行，但是因为是异步操作，所以会开启一个新的线程，所有的任务都在新的线程上执行），代码如下："><a href="#串行队列-异步操作（因为任务要一个一个的执行，但是因为是异步操作，所以会开启一个新的线程，所有的任务都在新的线程上执行），代码如下：" class="headerlink" title="串行队列+异步操作（因为任务要一个一个的执行，但是因为是异步操作，所以会开启一个新的线程，所有的任务都在新的线程上执行），代码如下："></a>串行队列+异步操作（因为任务要一个一个的执行，但是因为是异步操作，所以会开启一个新的线程，所有的任务都在新的线程上执行），代码如下：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (void)serialAndAsync &#123;</span><br><span class="line">    dispatch_queue_t queue = dispatch_queue_create(<span class="string">"serialAsync"</span>, DISPATCH_QUEUE_SERIAL);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">        </span><br><span class="line">        dispatch_async(queue, ^&#123;</span><br><span class="line">            </span><br><span class="line">            NSLog(@<span class="string">"%@ -- %d"</span>,[NSThread currentThread],i);</span><br><span class="line">            </span><br><span class="line">        &#125;);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1319536-2f45f3bd6cdf97de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="串行异步.png"></p>
+<p>number = 2，说明开启了一个新的子线程，但仍然是顺序执行。</p>
+<h3 id="并行队列-同步操作（因为同步操作不会开启新的线程，因此，即使并行队列可以一次开始多个任务，但实际上仍旧是每个任务都在主线程上执行，且按顺序执行）。代码如下："><a href="#并行队列-同步操作（因为同步操作不会开启新的线程，因此，即使并行队列可以一次开始多个任务，但实际上仍旧是每个任务都在主线程上执行，且按顺序执行）。代码如下：" class="headerlink" title="并行队列+同步操作（因为同步操作不会开启新的线程，因此，即使并行队列可以一次开始多个任务，但实际上仍旧是每个任务都在主线程上执行，且按顺序执行）。代码如下："></a>并行队列+同步操作（因为同步操作不会开启新的线程，因此，即使并行队列可以一次开始多个任务，但实际上仍旧是每个任务都在主线程上执行，且按顺序执行）。代码如下：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- (void)concurrentAndSync &#123;</span><br><span class="line">    dispatch_queue_t queue = dispatch_queue_create(<span class="string">"concurrentSync"</span>, DISPATCH_QUEUE_CONCURRENT);</span><br><span class="line">    <span class="keyword">for</span>(int i = 0; i &lt; 10; ++i)&#123;</span><br><span class="line">        </span><br><span class="line">        dispatch_sync(queue, ^&#123;</span><br><span class="line">            </span><br><span class="line">            NSLog(@<span class="string">"%@ %d"</span>,[NSThread currentThread],i);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1319536-ef1a79f67d5f7827.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="并行同步.png"></p>
+<p>没有开启新的线程，且按顺序执行。</p>
+<h3 id="并行队列-异步操作（并行队列会一次开始多个任务，且异步操作可以开启新的线程，因此同一时刻可能会同时执行多个任务，开启多个线程，且每个任务的结束时间是不确定的）。代码如下："><a href="#并行队列-异步操作（并行队列会一次开始多个任务，且异步操作可以开启新的线程，因此同一时刻可能会同时执行多个任务，开启多个线程，且每个任务的结束时间是不确定的）。代码如下：" class="headerlink" title="并行队列+异步操作（并行队列会一次开始多个任务，且异步操作可以开启新的线程，因此同一时刻可能会同时执行多个任务，开启多个线程，且每个任务的结束时间是不确定的）。代码如下："></a>并行队列+异步操作（并行队列会一次开始多个任务，且异步操作可以开启新的线程，因此同一时刻可能会同时执行多个任务，开启多个线程，且每个任务的结束时间是不确定的）。代码如下：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- (void)concurrentAndAsync &#123;</span><br><span class="line">    dispatch_queue_t queue = dispatch_queue_create(<span class="string">"concurrentAsync"</span>, DISPATCH_QUEUE_CONCURRENT);</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">        </span><br><span class="line">        dispatch_async(queue, ^&#123;</span><br><span class="line">            </span><br><span class="line">            NSLog(@<span class="string">"%@%d"</span>,[NSThread currentThread],i);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1319536-aea51c1cfd279d41.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="并行异步.png"></p>
+<p>可以看到，开启了多个线程，且任务不是按顺序执行完的。</p>
+<h2 id="全局队列"><a href="#全局队列" class="headerlink" title="全局队列"></a>全局队列</h2><p>为了方便开发，苹果还提供了有全局队列，全局队列实际上是并行队列，因此，全局队列的执行结果和并行队列的执行结果是一致的。代码如下：</p>
+<h3 id="全局队列-同步任务："><a href="#全局队列-同步任务：" class="headerlink" title="全局队列+同步任务："></a>全局队列+同步任务：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- (void)globalSync &#123;</span><br><span class="line">    </span><br><span class="line">    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; 10; ++i)&#123;</span><br><span class="line">        </span><br><span class="line">        dispatch_sync(queue, ^&#123;</span><br><span class="line">            </span><br><span class="line">            NSLog(@<span class="string">"%@ %d"</span>,[NSThread currentThread],i);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果:<br><img src="http://upload-images.jianshu.io/upload_images/1319536-01f286808670e796.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="全局同步.png"></p>
+<h3 id="全局队列-异步任务："><a href="#全局队列-异步任务：" class="headerlink" title="全局队列+异步任务："></a>全局队列+异步任务：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- (void)golbalAsync &#123;</span><br><span class="line">     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; 10; ++i)&#123;</span><br><span class="line">        dispatch_async(queue, ^&#123;</span><br><span class="line">            </span><br><span class="line">            NSLog(@<span class="string">"%@ %d"</span>,[NSThread currentThread],i);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果:<br><img src="http://upload-images.jianshu.io/upload_images/1319536-e9bc988491d2f979.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="全局异步.png"></p>
+<h2 id="主队列"><a href="#主队列" class="headerlink" title="主队列"></a>主队列</h2><p>苹果还提供了一种队列是主队列，主队列是串行队列，但是和串行队列又有差异。主队列上的任务都应该在主线程上顺序执行，没有异步的概念。也就是说，即使是异步任务在主队列上执行，也不会开启新的线程。</p>
+<h3 id="主队列-异步任务："><a href="#主队列-异步任务：" class="headerlink" title="主队列+异步任务："></a>主队列+异步任务：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- (void)mainAsync &#123;</span><br><span class="line">      dispatch_queue_t queue = dispatch_get_main_queue();</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">        </span><br><span class="line">        dispatch_async(queue, ^&#123;</span><br><span class="line">            </span><br><span class="line">            NSLog(@<span class="string">"%@ %d"</span>,[NSThread currentThread],i);</span><br><span class="line">            </span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1319536-822362f617c895ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2016-06-30 10.04.26.png"></p>
+<h3 id="主队列-同步任务（会阻塞线程），代码如下："><a href="#主队列-同步任务（会阻塞线程），代码如下：" class="headerlink" title="主队列+同步任务（会阻塞线程），代码如下："></a>主队列+同步任务（会阻塞线程），代码如下：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- (void)mainSync &#123;</span><br><span class="line">    dispatch_queue_t queue = dispatch_get_main_queue();</span><br><span class="line">         <span class="keyword">for</span> (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">        </span><br><span class="line">        dispatch_sync(queue, ^&#123;</span><br><span class="line">            </span><br><span class="line">            NSLog(@<span class="string">"%@ %d"</span>,[NSThread currentThread],i);</span><br><span class="line">            </span><br><span class="line">        &#125;);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>阻塞原因：</p>
+<blockquote>
+<p>主队列中本身是有一个任务A的（主任务），且该任务A还没有执行完。在执行任务A的过程中，又插入了新的同步任务B。我们知道，串行队列中，必须先执行完一个任务后，才能继续执行另一个任务。此时的情况时：<br>若想继续执行任务A，需要先把任务B执行完，若想继续执行任务B，需要先把任务A执行完，因此造成了阻塞。<br>在开发中，应该避免这种阻塞的情况。</p>
+</blockquote>
 
       
     </div>
@@ -477,7 +524,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Object-C/" rel="tag"># Object-C</a>
+            <a href="/tags/多线程/" rel="tag"># 多线程</a>
           
         </div>
       
@@ -490,8 +537,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/iOS9-新增-UIStackView-官方文档翻译/" rel="next" title=" iOS9 新增 UIStackView 官方文档翻译">
-                <i class="fa fa-chevron-left"></i>  iOS9 新增 UIStackView 官方文档翻译
+              <a href="/iOS的三种多线程技术/" rel="next" title="iOS的三种多线程技术">
+                <i class="fa fa-chevron-left"></i> iOS的三种多线程技术
               </a>
             
           </div>
@@ -500,8 +547,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/iOS的三种多线程技术/" rel="prev" title="iOS的三种多线程技术">
-                iOS的三种多线程技术 <i class="fa fa-chevron-right"></i>
+              <a href="/iOS-GCD-的使用技巧/" rel="prev" title="iOS GCD 的使用技巧">
+                iOS GCD 的使用技巧 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -680,7 +727,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先是-h文件"><span class="nav-number">1.</span> <span class="nav-text">首先是.h文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#然后是-m文件的实现"><span class="nav-number">2.</span> <span class="nav-text">然后是.m文件的实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义队列"><span class="nav-number">2.</span> <span class="nav-text">自定义队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#串行队列-同步操作-不会新建线程，而且任务是一个一个的执行，因此实际上就是顺序执行），代码如下："><span class="nav-number">2.1.</span> <span class="nav-text">串行队列 + 同步操作 (不会新建线程，而且任务是一个一个的执行，因此实际上就是顺序执行），代码如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#串行队列-异步操作（因为任务要一个一个的执行，但是因为是异步操作，所以会开启一个新的线程，所有的任务都在新的线程上执行），代码如下："><span class="nav-number">2.2.</span> <span class="nav-text">串行队列+异步操作（因为任务要一个一个的执行，但是因为是异步操作，所以会开启一个新的线程，所有的任务都在新的线程上执行），代码如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并行队列-同步操作（因为同步操作不会开启新的线程，因此，即使并行队列可以一次开始多个任务，但实际上仍旧是每个任务都在主线程上执行，且按顺序执行）。代码如下："><span class="nav-number">2.3.</span> <span class="nav-text">并行队列+同步操作（因为同步操作不会开启新的线程，因此，即使并行队列可以一次开始多个任务，但实际上仍旧是每个任务都在主线程上执行，且按顺序执行）。代码如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并行队列-异步操作（并行队列会一次开始多个任务，且异步操作可以开启新的线程，因此同一时刻可能会同时执行多个任务，开启多个线程，且每个任务的结束时间是不确定的）。代码如下："><span class="nav-number">2.4.</span> <span class="nav-text">并行队列+异步操作（并行队列会一次开始多个任务，且异步操作可以开启新的线程，因此同一时刻可能会同时执行多个任务，开启多个线程，且每个任务的结束时间是不确定的）。代码如下：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局队列"><span class="nav-number">3.</span> <span class="nav-text">全局队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局队列-同步任务："><span class="nav-number">3.1.</span> <span class="nav-text">全局队列+同步任务：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局队列-异步任务："><span class="nav-number">3.2.</span> <span class="nav-text">全局队列+异步任务：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主队列"><span class="nav-number">4.</span> <span class="nav-text">主队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主队列-异步任务："><span class="nav-number">4.1.</span> <span class="nav-text">主队列+异步任务：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主队列-同步任务（会阻塞线程），代码如下："><span class="nav-number">4.2.</span> <span class="nav-text">主队列+同步任务（会阻塞线程），代码如下：</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -877,9 +924,9 @@
   
     <script type="text/javascript">
       var disqus_config = function () {
-        this.page.url = 'http://yuhangjob.top/实现对UIAlertController和UIAlertView判断系统后的简单封装/';
-        this.page.identifier = '实现对UIAlertController和UIAlertView判断系统后的简单封装/';
-        this.page.title = '实现对UIAlertController和UIAlertView判断系统后的简单封装';
+        this.page.url = 'http://yuhangjob.top/iOS-GCD-的简单使用-基础/';
+        this.page.identifier = 'iOS-GCD-的简单使用-基础/';
+        this.page.title = 'iOS GCD 的简单使用(基础)';
         };
       function loadComments () {
         var d = document, s = d.createElement('script');

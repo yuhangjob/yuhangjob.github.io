@@ -115,13 +115,13 @@
 
 
 
-  <meta name="description" content="Masonry介绍与使用实践前言MagicNumber -&amp;gt; autoresizingMask -&amp;gt; autolayout 以上是纯手写代码所经历的关于页面布局的三个时期 在iphone1-iphone3gs时代 window的size固定为(320,480) 我们只需要简单计算一下相对位置就好了 在iphone4-iphone4s时代 苹果推出了retina屏 但是给了码农们非常大的">
+  <meta name="description" content="Masonry介绍与使用实践前言MagicNumber -&amp;gt; autoresizingMask -&amp;gt; autolayout 以上是纯手写代码所经历的关于页面布局的三个时期">
 <meta name="keywords" content="Masonry">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Masonry介绍与使用实践">
 <meta property="og:url" content="http://yuhangjob.top/Masonry介绍与使用实践/index.html">
 <meta property="og:site_name" content="YH&#39;S Develop Blog">
-<meta property="og:description" content="Masonry介绍与使用实践前言MagicNumber -&amp;gt; autoresizingMask -&amp;gt; autolayout 以上是纯手写代码所经历的关于页面布局的三个时期 在iphone1-iphone3gs时代 window的size固定为(320,480) 我们只需要简单计算一下相对位置就好了 在iphone4-iphone4s时代 苹果推出了retina屏 但是给了码农们非常大的">
+<meta property="og:description" content="Masonry介绍与使用实践前言MagicNumber -&amp;gt; autoresizingMask -&amp;gt; autolayout 以上是纯手写代码所经历的关于页面布局的三个时期">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://img-blog.csdn.net/20151210192336585">
 <meta property="og:image" content="https://img-blog.csdn.net/20151210192437584">
@@ -131,7 +131,7 @@
 <meta property="og:updated_time" content="2015-04-10T11:28:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Masonry介绍与使用实践">
-<meta name="twitter:description" content="Masonry介绍与使用实践前言MagicNumber -&amp;gt; autoresizingMask -&amp;gt; autolayout 以上是纯手写代码所经历的关于页面布局的三个时期 在iphone1-iphone3gs时代 window的size固定为(320,480) 我们只需要简单计算一下相对位置就好了 在iphone4-iphone4s时代 苹果推出了retina屏 但是给了码农们非常大的">
+<meta name="twitter:description" content="Masonry介绍与使用实践前言MagicNumber -&amp;gt; autoresizingMask -&amp;gt; autolayout 以上是纯手写代码所经历的关于页面布局的三个时期">
 <meta name="twitter:image" content="https://img-blog.csdn.net/20151210192336585">
 
 
@@ -459,13 +459,13 @@
       
         <h1 id="Masonry介绍与使用实践前言"><a href="#Masonry介绍与使用实践前言" class="headerlink" title="Masonry介绍与使用实践前言"></a>Masonry介绍与使用实践前言</h1><pre><code>MagicNumber -&gt; autoresizingMask -&gt; autolayout
 </code></pre><p>以上是纯手写代码所经历的关于页面布局的三个时期</p>
+<a id="more"></a>
 <p>在iphone1-iphone3gs时代 window的size固定为(320,480) 我们只需要简单计算一下相对位置就好了</p>
 <p>在iphone4-iphone4s时代 苹果推出了retina屏 但是给了码农们非常大的福利:window的size不变</p>
 <p>在iphone5-iphone5s时代 window的size变了(320,568) 这时autoresizingMask派上了用场(为啥这时候不用Autolayout? 因为还要支持ios5呗) 简单的适配一下即可</p>
 <p>在iphone6+时代 window的width也发生了变化(相对5和5s的屏幕比例没有变化) 终于是时候抛弃autoresizingMask改用autolayout了(不用支持ios5了 相对于屏幕适配的多样性来说autoresizingMask也已经过时了)</p>
 <p>那如何快速的上手autolayout呢? 说实话 当年ios6推出的同时新增了autolayout的特性 我看了一下官方文档和demo 就立马抛弃到一边了 因为实在过于的繁琐和啰嗦(有过经验的朋友肯定有同感)</p>
 <p>直到iPhone6发布之后 我知道使用autolayout势在必行了 这时想起了以前在浏览Github看到过的一个第三方库Masonry 在花了几个小时的研究使用后 我就将autolayout掌握了(重点是我并没有学习任何的官方文档或者其他的关于autolayout的知识) 这就是我为什么要写下这篇文章来推荐它的原因.</p>
-<a id="more"></a>
 <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Masonry 源码：<a href="https://github.com/Masonry/Masonry" target="_blank" rel="noopener">https://github.com/Masonry/Masonry</a></p>
 <p>Masonry是一个轻量级的布局框架 拥有自己的描述语法 采用更优雅的链式语法封装自动布局 简洁明了 并具有高可读性 而且同时支持 iOS 和 Max OS X。</p>
 <p>我们先来看一段官方的sample code来认识一下Masonry</p>
@@ -650,7 +650,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -692,7 +692,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

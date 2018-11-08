@@ -115,25 +115,25 @@
 
 
 
-  <meta name="description" content="iOS8之后用UIAlertController代替了UIAlertView,所以每次有需要弹窗的时候,都需要先判断系统,最近在做的项目中弹窗较多,如果每次都判断,真是太麻烦了,索性对UIAlertController和UIAlertView进行的封装了,封装在一个工具类中,在工具类中就对系统进行判断,然后在你需要弹窗的界面直接调用这个工具类的方法就可以了,减少了代码的耦合. 这个工具类其实也封装">
-<meta name="keywords" content="Object-C">
+  <meta name="description" content="iOS的三种多线程技术 NSThread 每个NSThread对象对应一个线程，量级较轻（真正的多线程）  以下两点是苹果专门开发的“并发”技术，使得程序员可以不再去关心线程的具体使用问题  NSOperation/NSOperationQueue 面向对象的线程技术  GCD —— Grand Central Dispatch（派发） 是基于C语言的框架，可以充分利用多核，是苹果推荐使用的多线程">
+<meta name="keywords" content="多线程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="实现对UIAlertController和UIAlertView判断系统后的简单封装">
-<meta property="og:url" content="http://yuhangjob.top/实现对UIAlertController和UIAlertView判断系统后的简单封装/index.html">
+<meta property="og:title" content="iOS的三种多线程技术">
+<meta property="og:url" content="http://yuhangjob.top/iOS的三种多线程技术/index.html">
 <meta property="og:site_name" content="YH&#39;S Develop Blog">
-<meta property="og:description" content="iOS8之后用UIAlertController代替了UIAlertView,所以每次有需要弹窗的时候,都需要先判断系统,最近在做的项目中弹窗较多,如果每次都判断,真是太麻烦了,索性对UIAlertController和UIAlertView进行的封装了,封装在一个工具类中,在工具类中就对系统进行判断,然后在你需要弹窗的界面直接调用这个工具类的方法就可以了,减少了代码的耦合. 这个工具类其实也封装">
+<meta property="og:description" content="iOS的三种多线程技术 NSThread 每个NSThread对象对应一个线程，量级较轻（真正的多线程）  以下两点是苹果专门开发的“并发”技术，使得程序员可以不再去关心线程的具体使用问题  NSOperation/NSOperationQueue 面向对象的线程技术  GCD —— Grand Central Dispatch（派发） 是基于C语言的框架，可以充分利用多核，是苹果推荐使用的多线程">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2015-12-29T16:00:00.000Z">
+<meta property="og:updated_time" content="2016-04-08T05:44:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="实现对UIAlertController和UIAlertView判断系统后的简单封装">
-<meta name="twitter:description" content="iOS8之后用UIAlertController代替了UIAlertView,所以每次有需要弹窗的时候,都需要先判断系统,最近在做的项目中弹窗较多,如果每次都判断,真是太麻烦了,索性对UIAlertController和UIAlertView进行的封装了,封装在一个工具类中,在工具类中就对系统进行判断,然后在你需要弹窗的界面直接调用这个工具类的方法就可以了,减少了代码的耦合. 这个工具类其实也封装">
+<meta name="twitter:title" content="iOS的三种多线程技术">
+<meta name="twitter:description" content="iOS的三种多线程技术 NSThread 每个NSThread对象对应一个线程，量级较轻（真正的多线程）  以下两点是苹果专门开发的“并发”技术，使得程序员可以不再去关心线程的具体使用问题  NSOperation/NSOperationQueue 面向对象的线程技术  GCD —— Grand Central Dispatch（派发） 是基于C语言的框架，可以充分利用多核，是苹果推荐使用的多线程">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yuhangjob.top/实现对UIAlertController和UIAlertView判断系统后的简单封装/">
+  <link rel="canonical" href="http://yuhangjob.top/iOS的三种多线程技术/">
 
 
 
@@ -143,7 +143,7 @@
   };
 </script>
 
-  <title>实现对UIAlertController和UIAlertView判断系统后的简单封装 | YH'S Develop Blog</title>
+  <title>iOS的三种多线程技术 | YH'S Develop Blog</title>
   
 
 
@@ -339,7 +339,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuhangjob.top/实现对UIAlertController和UIAlertView判断系统后的简单封装/">
+    <link itemprop="mainEntityOfPage" href="http://yuhangjob.top/iOS的三种多线程技术/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="阵浊秀">
@@ -356,7 +356,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">实现对UIAlertController和UIAlertView判断系统后的简单封装
+          <h1 class="post-title" itemprop="name headline">iOS的三种多线程技术
               
             
           </h1>
@@ -381,7 +381,7 @@
                 
               
 
-              <time title="创建时间：2015-12-30 00:00:00" itemprop="dateCreated datePublished" datetime="2015-12-30T00:00:00+08:00">2015-12-30</time>
+              <time title="创建时间：2016-04-08 13:44:29" itemprop="dateCreated datePublished" datetime="2016-04-08T13:44:29+08:00">2016-04-08</time>
             
 
             
@@ -414,9 +414,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/实现对UIAlertController和UIAlertView判断系统后的简单封装/#comments" itemprop="discussionUrl">
+                <a href="/iOS的三种多线程技术/#comments" itemprop="discussionUrl">
                 
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="实现对UIAlertController和UIAlertView判断系统后的简单封装/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="iOS的三种多线程技术/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -451,12 +451,60 @@
       
 
       
-        <p>iOS8之后用UIAlertController代替了UIAlertView,所以每次有需要弹窗的时候,都需要先判断系统,最近在做的项目中弹窗较多,如果每次都判断,真是太麻烦了,索性对UIAlertController和UIAlertView进行的封装了,封装在一个工具类中,在工具类中就对系统进行判断,然后在你需要弹窗的界面直接调用这个工具类的方法就可以了,减少了代码的耦合.</p>
-<p>这个工具类其实也封装的特别简单,因为都是用的系统的,分享出来给大家参考下:</p>
+        <h2 id="iOS的三种多线程技术"><a href="#iOS的三种多线程技术" class="headerlink" title="iOS的三种多线程技术"></a>iOS的三种多线程技术</h2><ol>
+<li><p>NSThread 每个NSThread对象对应一个线程，量级较轻（真正的多线程）</p>
+</li>
+<li><p>以下两点是苹果专门开发的“并发”技术，使得程序员可以不再去关心线程的具体使用问题</p>
+<ul>
+<li><p>NSOperation/NSOperationQueue 面向对象的线程技术</p>
+</li>
+<li><p>GCD —— Grand Central Dispatch（派发） 是基于C语言的框架，可以充分利用多核，是苹果推荐使用的多线程技术</p>
+</li>
+</ul>
+</li>
+</ol>
 <a id="more"></a>
-<h2 id="首先是-h文件"><a href="#首先是-h文件" class="headerlink" title="首先是.h文件"></a>首先是.h文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[objc] view plaincopy</span><br><span class="line"></span><br><span class="line">@interface UIAlertTool : NSObject</span><br><span class="line">-(void)showAlertView:(UIViewController *)viewController :(NSString *)title :(NSString *)message :(NSString *)cancelButtonTitle :(NSString *)otherButtonTitle :(void (^)())confirm :(void (^)())cancle;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
-<p>只有这么一个简单的方法  把你需要在弹窗中显示的内容以参数的形式传入就可以了</p>
-<h2 id="然后是-m文件的实现"><a href="#然后是-m文件的实现" class="headerlink" title="然后是.m文件的实现"></a>然后是.m文件的实现</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">[objc] view plaincopy</span><br><span class="line"></span><br><span class="line"><span class="comment">#define IAIOS8 ([[[UIDevice currentDevice] systemVersion] floatValue] &gt;= 8.0)</span></span><br><span class="line"><span class="comment">#import "UIAlertTool.h"</span></span><br><span class="line">typedef void (^confirm)();</span><br><span class="line">typedef void (^cancle)();</span><br><span class="line">@interface <span class="function"><span class="title">UIAlertTool</span></span>()&#123;</span><br><span class="line">    confirm confirmParam;</span><br><span class="line">    cancle  cancleParam;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation UIAlertTool</span><br><span class="line"></span><br><span class="line">-(void)showAlertView:(UIViewController *)viewController :(NSString *)title :(NSString *)message :(NSString *)cancelButtonTitle :(NSString *)otherButtonTitle :(void (^)())confirm :(void (^)())cancle&#123;</span><br><span class="line">    confirmParam=confirm;</span><br><span class="line">    cancleParam=cancle;</span><br><span class="line">    <span class="keyword">if</span> (IAIOS8) &#123;</span><br><span class="line">        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line"></span><br><span class="line">         // Create the actions.</span><br><span class="line">         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) &#123;</span><br><span class="line">             cancle();</span><br><span class="line"></span><br><span class="line">        &#125;];</span><br><span class="line"></span><br><span class="line">        UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) &#123;</span><br><span class="line">            confirm();</span><br><span class="line">        &#125;];</span><br><span class="line"></span><br><span class="line">        // Add the actions.</span><br><span class="line">        [alertController addAction:cancelAction];</span><br><span class="line">        [alertController addAction:otherAction];</span><br><span class="line"></span><br><span class="line">        [viewController presentViewController:alertController animated:YES completion:nil];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        UIAlertView *TitleAlert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:otherButtonTitle otherButtonTitles:cancelButtonTitle,nil];</span><br><span class="line">        [TitleAlert show];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex&#123;</span><br><span class="line">    <span class="keyword">if</span> (buttonIndex==0) &#123;</span><br><span class="line">        confirmParam();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        cancleParam();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>以上这三种编程方式从上到下，抽象度层次是从低到高的，抽象度越高的使用越简单，也是Apple最推荐使用的，在项目中很多框架技术分别使用了不同多线程技术。</p>
+<h2 id="三种多线程技术的对比"><a href="#三种多线程技术的对比" class="headerlink" title="三种多线程技术的对比"></a>三种多线程技术的对比</h2><h3 id="NSThread"><a href="#NSThread" class="headerlink" title="NSThread:"></a>NSThread:</h3><ul>
+<li>优点：NSThread 比其他两个轻量级，使用简单</li>
+<li>缺点：需要自己管理线程的生命周期、线程同步、加锁、睡眠以及唤醒等。线程同步对数据的加锁会有一定的系统开销</li>
+</ul>
+<h3 id="NSOperation："><a href="#NSOperation：" class="headerlink" title="NSOperation："></a>NSOperation：</h3><ul>
+<li>不需要关心线程管理，数据同步的事情，可以把精力放在自己需要执行的操作上</li>
+<li>NSOperation是面向对象的</li>
+</ul>
+<h3 id="GCD："><a href="#GCD：" class="headerlink" title="GCD："></a>GCD：</h3><ul>
+<li>Grand Central Dispatch是由苹果开发的一个多核编程的解决方案。iOS4.0+才能使用，是替代NSThread， NSOperation的高效和强大的技术</li>
+<li>GCD是基于C语言的</li>
+</ul>
+<h2 id="三种多线程技术的实现"><a href="#三种多线程技术的实现" class="headerlink" title="三种多线程技术的实现"></a>三种多线程技术的实现</h2><h3 id="NSThread的多线程技术，"><a href="#NSThread的多线程技术，" class="headerlink" title="NSThread的多线程技术，"></a>NSThread的多线程技术，</h3><h4 id="类方法直接开启后台线程，并执行选择器方法"><a href="#类方法直接开启后台线程，并执行选择器方法" class="headerlink" title="类方法直接开启后台线程，并执行选择器方法"></a>类方法直接开启后台线程，并执行选择器方法</h4><p><code>detachNewThreadSelector</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//新建一个线程，调用@selector方法 </span><br><span class="line">[NSThread detachNewThreadSelector:@selector(bigDemo)  </span><br><span class="line">   toTarget:self withObject:nil];</span><br></pre></td></tr></table></figure>
+<h4 id="成员方法，在实例化线程对象之后，需要使用start执行选择器方法"><a href="#成员方法，在实例化线程对象之后，需要使用start执行选择器方法" class="headerlink" title="成员方法，在实例化线程对象之后，需要使用start执行选择器方法"></a>成员方法，在实例化线程对象之后，需要使用start执行选择器方法</h4><pre><code>`initWithTarget`
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//成员方法 </span><br><span class="line">NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(bigDemo) object:nil]; </span><br><span class="line">// 启动start线程</span><br><span class="line">[thread start];</span><br></pre></td></tr></table></figure>
+<p>对于NSThread的简单使用，可以用NSObject的performSelectorInBackground替代</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//performSelectorInBackground是将bigDemo的任务放在后台线程中执行</span><br><span class="line">[self performSelectorInBackground:@selector(bigDemo) withObject:nil];</span><br></pre></td></tr></table></figure>
+<p> 同时，在NSThread调用的方法中，同样要使用autoreleasepool进行内存管理，否则容易出现内存泄露。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 自动释放池</span><br><span class="line">// 负责其他线程上的内存管理，在使用NSThread或者NSObject的线程方法时，一定要使用自动释放池</span><br><span class="line">// 否则容易出现内存泄露。</span><br><span class="line">     @autoreleasepool &#123;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="NSOperation，面向对象的多线程技术"><a href="#NSOperation，面向对象的多线程技术" class="headerlink" title="NSOperation，面向对象的多线程技术"></a>NSOperation，面向对象的多线程技术</h3><h4 id="使用步骤："><a href="#使用步骤：" class="headerlink" title="使用步骤："></a>使用步骤：</h4><h5 id="实例化操作队列"><a href="#实例化操作队列" class="headerlink" title="实例化操作队列"></a>实例化操作队列</h5><p><code>_queue = [[NSOperationQueue alloc] init];</code></p>
+<pre><code>//NSInvocationOperation
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NSInvocationOperation *op1 = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(opAction) object:nil];</span><br><span class="line"></span><br><span class="line">// 如果使用start，会在当前线程启动操作</span><br><span class="line">// [op1 start];</span><br><span class="line">// 一旦将操作添加到操作队列，操作就会启动</span><br><span class="line">   [_queue addOperation:op1];</span><br></pre></td></tr></table></figure>
+<pre><code>//NSBlockOpera
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#pragma mark 模仿下载网络图像</span></span><br><span class="line">- (IBAction)operationDemo3:(id)sender</span><br><span class="line">&#123;</span><br><span class="line">	// 1. 下载</span><br><span class="line">   NSBlockOperation *op1 = [NSBlockOperation blockOperationWithBlock:^&#123;</span><br><span class="line">       NSLog(@<span class="string">"下载 %@"</span> , [NSThread currentThread]);</span><br><span class="line">    &#125;];</span><br><span class="line">   // 2. 滤镜</span><br><span class="line">   NSBlockOperation *op2 = [NSBlockOperation blockOperationWithBlock:^&#123;</span><br><span class="line">       NSLog(@<span class="string">"滤镜 %@"</span> , [NSThread currentThread]);</span><br><span class="line">    &#125;];</span><br><span class="line">   // 3. 显示</span><br><span class="line">   NSBlockOperation *op3 = [NSBlockOperation blockOperationWithBlock:^&#123;</span><br><span class="line">       NSLog(@<span class="string">"更新UI %@"</span> , [NSThread currentThread]);</span><br><span class="line">    &#125;];</span><br><span class="line">  </span><br><span class="line">   // 添加操作之间的依赖关系，所谓“依赖”关系，就是等待前一个任务完成后，后一个任务才能启动</span><br><span class="line">   // 依赖关系可以跨线程队列实现</span><br><span class="line">   // 提示：在指定依赖关系时，注意不要循环依赖，否则不工作。</span><br><span class="line">    [op2 addDependency:op1];</span><br><span class="line">    [op3 addDependency:op2];</span><br><span class="line">//  [op1 addDependency:op3];</span><br><span class="line">  </span><br><span class="line">    [_queue addOperation:op1];</span><br><span class="line">    [_queue addOperation:op2];</span><br><span class="line">    [[NSOperationQueue mainQueue] addOperation:op3];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="将操作添加到队列NSOperationQueue即可启动多线程执行"><a href="#将操作添加到队列NSOperationQueue即可启动多线程执行" class="headerlink" title="将操作添加到队列NSOperationQueue即可启动多线程执行"></a>将操作添加到队列NSOperationQueue即可启动多线程执行</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[_queue addOperation:op1];</span><br><span class="line">[_queue addOperation:op2];</span><br></pre></td></tr></table></figure>
+<h4 id="更新UI使用主线程队列"><a href="#更新UI使用主线程队列" class="headerlink" title="更新UI使用主线程队列"></a>更新UI使用主线程队列</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//两方式</span><br><span class="line">[NSOpeationQueue mainQueue] addOperation ^&#123;</span><br><span class="line"></span><br><span class="line"> &#125;;</span><br><span class="line"> </span><br><span class="line">[[NSOperationQueue mainQueue] addOperation:op3];</span><br></pre></td></tr></table></figure>
+<h4 id="3-操作队列的setMaxConcurrentOperationCount可以设置同时并发的线程数量！"><a href="#3-操作队列的setMaxConcurrentOperationCount可以设置同时并发的线程数量！" class="headerlink" title="3.操作队列的setMaxConcurrentOperationCount可以设置同时并发的线程数量！"></a>3.操作队列的setMaxConcurrentOperationCount可以设置同时并发的线程数量！</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 控制同时最大并发的线程数量</span><br><span class="line">[_queue setMaxConcurrentOperationCount:2];</span><br></pre></td></tr></table></figure>
+<p>提示：此功能仅有NSOperation有</p>
+<h4 id="使用addDependency可以设置任务的执行先后顺序，同时可以跨操作队列指定依赖关系"><a href="#使用addDependency可以设置任务的执行先后顺序，同时可以跨操作队列指定依赖关系" class="headerlink" title="使用addDependency可以设置任务的执行先后顺序，同时可以跨操作队列指定依赖关系"></a>使用addDependency可以设置任务的执行先后顺序，同时可以跨操作队列指定依赖关系</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 添加操作之间的依赖关系，所谓“依赖”关系，就是等待前一个任务完成后，后一个任务才能启动</span><br><span class="line"></span><br><span class="line">// 依赖关系可以跨线程队列实现</span><br><span class="line"></span><br><span class="line">// 提示：在指定依赖关系时，注意不要循环依赖，否则不工作。</span><br><span class="line">[op2 addDependency:op1];</span><br><span class="line">[op3 addDependency:op2];</span><br><span class="line">[op1 addDependency:op3];</span><br></pre></td></tr></table></figure>
+<p>提示：在指定依赖关系时，注意不要循环依赖，否则不工作。</p>
+<h3 id="GCD，C语言"><a href="#GCD，C语言" class="headerlink" title="GCD，C语言"></a>GCD，C语言</h3><p>GCD就是为了在“多核”上使用多线程技术</p>
+<h4 id="要使用GCD，所有的方法都是dispatch开头的"><a href="#要使用GCD，所有的方法都是dispatch开头的" class="headerlink" title="要使用GCD，所有的方法都是dispatch开头的"></a>要使用GCD，所有的方法都是dispatch开头的</h4><h4 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h4><p> global  全局</p>
+<p> queue   队列</p>
+<p> async   异步</p>
+<p> sync    同步</p>
+<h4 id="要执行异步的任务，就在全局队列中执行即可"><a href="#要执行异步的任务，就在全局队列中执行即可" class="headerlink" title="要执行异步的任务，就在全局队列中执行即可"></a>要执行异步的任务，就在全局队列中执行即可</h4><p> <code>dispatch_async</code> 异步执行控制不住先后顺序</p>
+<h4 id="关于GCD的队列"><a href="#关于GCD的队列" class="headerlink" title="关于GCD的队列"></a>关于GCD的队列</h4><h5 id="全局队列-dispatch-get-global-queue"><a href="#全局队列-dispatch-get-global-queue" class="headerlink" title="全局队列    dispatch_get_global_queue"></a>全局队列    <code>dispatch_get_global_queue</code></h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">参数：优先级 `DISPATCH_QUEUE_PRIORITY_DEFAULT` 始终是 0</span><br><span class="line"></span><br><span class="line">dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line"></span><br><span class="line">可同步 可异步</span><br></pre></td></tr></table></figure>
+<h5 id="串行队列"><a href="#串行队列" class="headerlink" title="串行队列"></a>串行队列</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t queue = dispatch_queue_create(<span class="string">"myQueue"</span>, DISPATCH_QUEUE_SERIAL);</span><br><span class="line"></span><br><span class="line">是创建得到的，不能直接获取只能同步</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="comment">##### 主队列: dispatch_get_main_queue</span></span><br><span class="line"></span><br><span class="line">``` bash</span><br><span class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">	NSLog(@<span class="string">"main - &gt; %@"</span>, [NSThread currentThread]);</span><br><span class="line">&#125;);</span><br><span class="line">只能同歩</span><br></pre></td></tr></table></figure>
+<h4 id="异步和同步与方法名无关，与运行所在的队列有关！"><a href="#异步和同步与方法名无关，与运行所在的队列有关！" class="headerlink" title="异步和同步与方法名无关，与运行所在的队列有关！"></a>异步和同步与方法名无关，与运行所在的队列有关！</h4><p>同步主要用来控制方法的被调用的顺序</p>
 
       
     </div>
@@ -477,7 +525,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Object-C/" rel="tag"># Object-C</a>
+            <a href="/tags/多线程/" rel="tag"># 多线程</a>
           
         </div>
       
@@ -490,8 +538,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/iOS9-新增-UIStackView-官方文档翻译/" rel="next" title=" iOS9 新增 UIStackView 官方文档翻译">
-                <i class="fa fa-chevron-left"></i>  iOS9 新增 UIStackView 官方文档翻译
+              <a href="/实现对UIAlertController和UIAlertView判断系统后的简单封装/" rel="next" title="实现对UIAlertController和UIAlertView判断系统后的简单封装">
+                <i class="fa fa-chevron-left"></i> 实现对UIAlertController和UIAlertView判断系统后的简单封装
               </a>
             
           </div>
@@ -500,8 +548,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/iOS的三种多线程技术/" rel="prev" title="iOS的三种多线程技术">
-                iOS的三种多线程技术 <i class="fa fa-chevron-right"></i>
+              <a href="/iOS-GCD-的简单使用-基础/" rel="prev" title="iOS GCD 的简单使用(基础)">
+                iOS GCD 的简单使用(基础) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -680,7 +728,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先是-h文件"><span class="nav-number">1.</span> <span class="nav-text">首先是.h文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#然后是-m文件的实现"><span class="nav-number">2.</span> <span class="nav-text">然后是.m文件的实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS的三种多线程技术"><span class="nav-number">1.</span> <span class="nav-text">iOS的三种多线程技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三种多线程技术的对比"><span class="nav-number">2.</span> <span class="nav-text">三种多线程技术的对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NSThread"><span class="nav-number">2.1.</span> <span class="nav-text">NSThread:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NSOperation："><span class="nav-number">2.2.</span> <span class="nav-text">NSOperation：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GCD："><span class="nav-number">2.3.</span> <span class="nav-text">GCD：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三种多线程技术的实现"><span class="nav-number">3.</span> <span class="nav-text">三种多线程技术的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NSThread的多线程技术，"><span class="nav-number">3.1.</span> <span class="nav-text">NSThread的多线程技术，</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类方法直接开启后台线程，并执行选择器方法"><span class="nav-number">3.1.1.</span> <span class="nav-text">类方法直接开启后台线程，并执行选择器方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#成员方法，在实例化线程对象之后，需要使用start执行选择器方法"><span class="nav-number">3.1.2.</span> <span class="nav-text">成员方法，在实例化线程对象之后，需要使用start执行选择器方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NSOperation，面向对象的多线程技术"><span class="nav-number">3.2.</span> <span class="nav-text">NSOperation，面向对象的多线程技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用步骤："><span class="nav-number">3.2.1.</span> <span class="nav-text">使用步骤：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实例化操作队列"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">实例化操作队列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#将操作添加到队列NSOperationQueue即可启动多线程执行"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">将操作添加到队列NSOperationQueue即可启动多线程执行</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更新UI使用主线程队列"><span class="nav-number">3.2.2.</span> <span class="nav-text">更新UI使用主线程队列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-操作队列的setMaxConcurrentOperationCount可以设置同时并发的线程数量！"><span class="nav-number">3.2.3.</span> <span class="nav-text">3.操作队列的setMaxConcurrentOperationCount可以设置同时并发的线程数量！</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用addDependency可以设置任务的执行先后顺序，同时可以跨操作队列指定依赖关系"><span class="nav-number">3.2.4.</span> <span class="nav-text">使用addDependency可以设置任务的执行先后顺序，同时可以跨操作队列指定依赖关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GCD，C语言"><span class="nav-number">3.3.</span> <span class="nav-text">GCD，C语言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#要使用GCD，所有的方法都是dispatch开头的"><span class="nav-number">3.3.1.</span> <span class="nav-text">要使用GCD，所有的方法都是dispatch开头的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#名词解释"><span class="nav-number">3.3.2.</span> <span class="nav-text">名词解释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#要执行异步的任务，就在全局队列中执行即可"><span class="nav-number">3.3.3.</span> <span class="nav-text">要执行异步的任务，就在全局队列中执行即可</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于GCD的队列"><span class="nav-number">3.3.4.</span> <span class="nav-text">关于GCD的队列</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#全局队列-dispatch-get-global-queue"><span class="nav-number">3.3.4.1.</span> <span class="nav-text">全局队列    dispatch_get_global_queue</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#串行队列"><span class="nav-number">3.3.4.2.</span> <span class="nav-text">串行队列</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异步和同步与方法名无关，与运行所在的队列有关！"><span class="nav-number">3.3.5.</span> <span class="nav-text">异步和同步与方法名无关，与运行所在的队列有关！</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -877,9 +925,9 @@
   
     <script type="text/javascript">
       var disqus_config = function () {
-        this.page.url = 'http://yuhangjob.top/实现对UIAlertController和UIAlertView判断系统后的简单封装/';
-        this.page.identifier = '实现对UIAlertController和UIAlertView判断系统后的简单封装/';
-        this.page.title = '实现对UIAlertController和UIAlertView判断系统后的简单封装';
+        this.page.url = 'http://yuhangjob.top/iOS的三种多线程技术/';
+        this.page.identifier = 'iOS的三种多线程技术/';
+        this.page.title = 'iOS的三种多线程技术';
         };
       function loadComments () {
         var d = document, s = d.createElement('script');
