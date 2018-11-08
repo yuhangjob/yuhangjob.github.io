@@ -116,6 +116,7 @@
 
 
   <meta name="description" content="iOS9 新增 UIStackView 官方文档翻译">
+<meta name="keywords" content="Object-C">
 <meta property="og:type" content="article">
 <meta property="og:title" content=" iOS9 新增 UIStackView 官方文档翻译">
 <meta property="og:url" content="http://yuhangjob.top/iOS9-新增-UIStackView-官方文档翻译/index.html">
@@ -396,6 +397,24 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/iOS开发记录/" itemprop="url" rel="index"><span itemprop="name">iOS开发记录</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -447,10 +466,9 @@
 <p>UIStackView 类提供了一个高效的接口用于平铺一行或一列的视图组合。Stack视图使你依靠自动布局的能力，创建用户接口使得可以动态的调整设备朝向、屏幕尺寸及任何可用范围内的变化。Stack视图管理着所有在它的 arrangedSubviews 属性中的视图的布局。这些视图根据它们在 arrangedSubviews 数组中的顺序沿着 Stack 视图的轴向排列。精确的布局变量根据 Stack 视图的 axis, distribution,alignment, spacing, 和其它属性共同决定。</p>
 <p><img src="https://img-blog.csdn.net/20151215084135698" alt=""><br>　<br>　使用 stack 视图，打开一个你希望编辑的 Storyboard，从对象库中拖拽出一个 Horizontal Stack View 或者一个 Vertical Stack View，并放置到你希望的位置上 。下一步，将控件或视图拖拽放置到 stack 中,也可以先拖拽控件再合并为 Stack View，如果需要你可以继续添加视图或者控件给指定的 stack。Interface Builder 将根据 stack 的内容自动调节尺寸。你也可以通过修改属性面板中 Stack视图的属性调整 stack 内容的外观。</p>
 <ul>
-<li>注意：你需要负责指定 stack 视图的位置和尺寸（可选的）。然后 stack 视图将管理其内容的布局和尺寸。
-　　<h1 id="二、Stack-视图与自动布局"><a href="#二、Stack-视图与自动布局" class="headerlink" title="二、Stack 视图与自动布局"></a>二、Stack 视图与自动布局</h1></li>
+<li>注意：你需要负责指定 stack 视图的位置和尺寸（可选的）。然后 stack 视图将管理其内容的布局和尺寸。</li>
 </ul>
-<p>Stack 视图使用自动布局来定位和控制其管理的视图的尺寸。stack 视图沿着它的轴向拼凑第一个和最后一个被管理视图，使其边界平齐。对于一个水平 stack 视图，这意味着第一个被管理视图的左边界是与 stack 的左边界平齐的，并且最后一个被管理视图右边界与 stack的右边界平齐。对于垂直 stack，上边界和下边界是各自平齐的。如果你设置了 stack 视图的 layoutMarginsRelativeArrangement 属性为 YES，stack 视图将使用相关的边距与其内容对齐，而不是边界。</p>
+<h1 id="二、Stack-视图与自动布局"><a href="#二、Stack-视图与自动布局" class="headerlink" title="二、Stack 视图与自动布局"></a>二、Stack 视图与自动布局</h1><p>Stack 视图使用自动布局来定位和控制其管理的视图的尺寸。stack 视图沿着它的轴向拼凑第一个和最后一个被管理视图，使其边界平齐。对于一个水平 stack 视图，这意味着第一个被管理视图的左边界是与 stack 的左边界平齐的，并且最后一个被管理视图右边界与 stack的右边界平齐。对于垂直 stack，上边界和下边界是各自平齐的。如果你设置了 stack 视图的 layoutMarginsRelativeArrangement 属性为 YES，stack 视图将使用相关的边距与其内容对齐，而不是边界。</p>
 <p>对于除去 UIStackViewDistributionFillEqually 分布以外的分布方式，stack 视图使用被管理视图的 intrinsicContentSize 属性来计算沿着 stack 轴向的视图尺寸。UIStackViewDistributionFillEqually 分布将调节所有被管理视图的在 stack 轴向上拥有相同尺寸，以填充 stack 视图。如果可能，stack 视图将拉伸所有被管理视图，来匹配其在 stack 轴向上最长的原有尺寸（译注：保证长宽比的情况下根据 stack 轴向长度拉伸视图）。</p>
 <p>对于除去 UIStackViewAlignmentFill 对齐方式以外的对齐方式，stack 视图使用其管理的视图的 intrinsicContentSize 属性来计算视图垂直于 stack 轴向的尺寸。 UIStackViewAlignmentFill 重新调节了所有其管理的视图，使这些视图填充 stack 视图垂直于其轴向空间。如果可能，stack 视图将拉伸其所有管理的视图来匹配其垂直于 stack 轴向的最大固有尺寸。</p>
 <p><img src="https://img-blog.csdn.net/20151215085028604" alt=""></p>
@@ -561,6 +579,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Object-C/" rel="tag"># Object-C</a>
+          
+        </div>
+      
 
       
       
@@ -580,8 +604,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/iOS-WKWebView添加类似微信的进度条/" rel="prev" title="iOS WKWebView添加类似微信的进度条">
-                iOS WKWebView添加类似微信的进度条 <i class="fa fa-chevron-right"></i>
+              <a href="/深入理解RunLoop/" rel="prev" title="深入理解RunLoop">
+                深入理解RunLoop <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -664,7 +688,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
