@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="图解 git">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git使用">
+<meta property="og:url" content="http://yuhangjob.top/Git使用/index.html">
+<meta property="og:site_name" content="YH&#39;S Develop Blog">
+<meta property="og:description" content="图解 git">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1319536-dcdd6965a9b05cf0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1319536-6701c2c3c74ca246.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1319536-37ebb95638640fe7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1319536-f9ca1ff192816c5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1319536-3c6633493858cad7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-04-09T02:49:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git使用">
+<meta name="twitter:description" content="图解 git">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1319536-dcdd6965a9b05cf0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yuhangjob.top/Git使用/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Git使用 | YH'S Develop Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YH'S Develop Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">In me the tiger sniffs the rose</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuhangjob.top/Git使用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="阵浊秀">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YH'S Develop Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Git使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-04-09 10:49:08" itemprop="dateCreated datePublished" datetime="2017-04-09T10:49:08+08:00">2017-04-09</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/iOS开发记录/" itemprop="url" rel="index"><span itemprop="name">iOS开发记录</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/Git使用/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="Git使用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>图解 git</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1319536-dcdd6965a9b05cf0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="0_1.png"></p>
+<a id="more"></a>
+<h1 id="git概述"><a href="#git概述" class="headerlink" title="git概述"></a>git概述</h1><h2 id="git简介"><a href="#git简介" class="headerlink" title="git简介?"></a>git简介?</h2><pre><code>1.什么是git?
+&gt; git是一款开源的分布式版本控制工具
+&gt; 在世界上所有的分布式版本控制工具中，git是最快、最简单、最流行的
+2. git的起源?
+&gt; 作者是Linux之父：Linus Benedict Torvalds
+&gt; 当初开发git仅仅是为了辅助Linux内核的开发（管理源代码）
+3.git的现状?
+&gt; 在国外已经非常普及，国内并未普及（在慢慢普及）
+&gt; 越来越多的开源项目已经转移到git
+</code></pre><h2 id="常见的源代码管理工具有哪些"><a href="#常见的源代码管理工具有哪些" class="headerlink" title="常见的源代码管理工具有哪些?"></a>常见的源代码管理工具有哪些?</h2><blockquote>
+<p>CVS</p>
+<pre><code>- 开启版本控制之门
+- 1990年诞生，“远古时代”的主流源代码管理工具
+</code></pre><p>SVN</p>
+<pre><code>- 全称是Subversion，集中式版本控制之王者
+- 是CVS的接班人，速度比CVS快，功能比CVS多且强大
+- 在国内软件企业中使用最为普遍（70%-90%）
+</code></pre><p>ClearCase</p>
+<pre><code>- 收费的集中式版本控制工具，安装比Windows还大，运行比蜗牛还慢
+- 能用ClearCase的一般是世界500强，他们有个共同的特点是财大气粗或者人傻钱多
+</code></pre><p>VSS</p>
+<pre><code>- 微软的集中式版本控制工具，集成在Visual Studio中
+</code></pre></blockquote>
+<h2 id="集中式版本控制"><a href="#集中式版本控制" class="headerlink" title="集中式版本控制"></a>集中式版本控制</h2><p>所有的代码都集中在一块, 统一进行管理<br><img src="https://upload-images.jianshu.io/upload_images/1319536-6701c2c3c74ca246.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="分布式版本控制图解.png"></p>
+<h2 id="分布式版本控制"><a href="#分布式版本控制" class="headerlink" title="分布式版本控制"></a>分布式版本控制</h2><p><img src="https://upload-images.jianshu.io/upload_images/1319536-37ebb95638640fe7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="集中式版本控制图解.png"><br>在每个客户端都有一份完整的代码仓库, 可以在每个客户端自行管理 </p>
+<h2 id="git-和-svn的简单对比"><a href="#git-和-svn的简单对比" class="headerlink" title="git 和 svn的简单对比"></a>git 和 svn的简单对比</h2><blockquote>
+<p>速度<br>    在很多情况下，git的速度远远比SVN快<br>结构<br>    SVN是集中式管理，git是分布式管理<br>其他<br>    SVN使用分支比较笨拙，git可以轻松拥有无限个分支<br>    SVN必须联网才能正常工作，git支持本地版本控制工作<br>    旧版本的SVN会在每一个目录置放一个.svn，git只会在根目录拥有一个.git</p>
+</blockquote>
+<h2 id="SVN工作流程和GIT工作流程对比"><a href="#SVN工作流程和GIT工作流程对比" class="headerlink" title="SVN工作流程和GIT工作流程对比"></a>SVN工作流程和GIT工作流程对比</h2><ul>
+<li>svn checkout —— git clone<br>  svn 只下载代码， git 会连同代码仓库一起下载下来</li>
+<li>svn commit —— git commit<br>  svn 是提交到服务器，git 中是提交到本地仓库，需要使用push才能提交到服务器</li>
+<li>svn update - git pull<br> 都是从服务器下载最新被修改的代码</li>
+</ul>
+<p><strong>分布式和集中式最大的区别在于：在分布式下，本地有个代码仓库,开发者可以在本地提交; 而集中式版本控制, 只有在服务器才有一个代码仓库, 只能在服务器进行统一管理</strong></p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><ul>
+<li>工作区<blockquote>
+<p>与.git文件夹同级的其他文件夹或者子文件夹</p>
+<ul>
+<li>版本控制库<br>暂缓区<br>分支(Git不像SVN那样有主干和分支的概念. 仅仅存在分支,其中master分支为默认被创建的分支,类似于SVN中的主干)<pre><code>切换分支:通过控制HEAD指针指向不同的分支,就可以切换*
+</code></pre></li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p><strong> 操作原则: 所有新添加/删除/修改的文件 必须先添加到暂缓区,然后才能提交到HEAD指向的当前分支中</strong></p>
+<h2 id="git使用环境"><a href="#git使用环境" class="headerlink" title="git使用环境"></a>git使用环境</h2><pre><code>1.单人开发只需要一个本地库
+:原因:不需要与他人共享代码,只负责管理自己代码即可;例如提交代码,删除代码,版本控制等等
+
+2.多人开发时需要一个共享版本库
+ 共享版本库的形式:
+ 本地共享库:文件夹/U盘/硬盘
+ 远程共享库:自己搭建git服务器/ 托管到第三方平台(例如github, oschina)
+
+3.使用环境  无论是单人开发还是多人开发,客户端都可以使用命令行或者图形界面使用git  
+</code></pre><blockquote>
+<p>SourceTree</p>
+</blockquote>
+<ul>
+<li>下载地址：<a href="http://www.sourcetreeapp.com/download/" target="_blank" rel="noopener">http://www.sourcetreeapp.com/download/</a></li>
+</ul>
+<blockquote>
+<p>GitHub</p>
+</blockquote>
+<ul>
+<li><p>下载地址：<a href="https://mac.github.com" target="_blank" rel="noopener">https://mac.github.com</a></p>
+</li>
+<li><p>不过它是专门为GitHub网站而设计的</p>
+</li>
+</ul>
+<blockquote>
+<p>Xcode</p>
+</blockquote>
+<ul>
+<li>虽然集成较好,但是只能做一些常用的简单操作,复杂操作还要使用命令行</li>
+</ul>
+<h1 id="Git命令行演练-个人开发"><a href="#Git命令行演练-个人开发" class="headerlink" title="Git命令行演练-个人开发"></a>Git命令行演练-个人开发</h1><h2 id="如何学习git指令"><a href="#如何学习git指令" class="headerlink" title="如何学习git指令"></a>如何学习git指令</h2><pre><code>&gt; git help [子命令]
+&gt; 和学习SVN指令是一样的，只不过git是通过使用指南的形式展示给用户看（不能编辑的vim编辑器），使用q退出vim编辑器，按空格进入下一页，ctrl + B 回到上一页； /关键字 进行搜索
+</code></pre><h2 id="初始化一个本地仓库"><a href="#初始化一个本地仓库" class="headerlink" title="初始化一个本地仓库"></a>初始化一个本地仓库</h2><pre><code>&gt; 原因: 管理本地代码,修改上传,版本回退
+&gt; 命令: git init
+</code></pre><h2 id="配置仓库"><a href="#配置仓库" class="headerlink" title="配置仓库"></a>配置仓库</h2><pre><code>&gt; 告诉git你是谁？
+    原因: 追踪修改记录
+    命令: git config user.name “shunzi”
+
+&gt; 告诉git怎样联系你？
+    原因: 多人合作开发时, 沟通交流
+    命令: git config user.email &quot;shunzi@qq.com&quot;
+
+&gt; 查看配置信息（.git -&gt; config打开）
+    命令:  git config -l
+</code></pre><h2 id="个人开发演练"><a href="#个人开发演练" class="headerlink" title="个人开发演练"></a>个人开发演练</h2><pre><code> &gt; 创建文件并提交
+    命令: 
+        touch main.c
+        git add . 
+        git commit -m “注释”
+&gt; 修改文件并提交 
+    命令: 
+        git add .
+        git commit -m “注释”
+&gt; 删除文件并提交
+    命令: 
+        git rm person.h
+        git commit -m “注释”
+&gt; 日志查看
+    命令: 
+        git log 
+        git reflog
+&gt; 版本回退
+    命令: 
+        git reset —hard HEAD 重置到当前版本
+        git reset —hard HEAD^^ 重置到上上个版本
+        git reset ——hard HEAD2 重置到往上2个版本
+        git reset —hard 七位版本号 重置到指定版本::
+</code></pre><h2 id="备注补充"><a href="#备注补充" class="headerlink" title="备注补充"></a>备注补充</h2><h3 id="文件状态-git-status"><a href="#文件状态-git-status" class="headerlink" title="文件状态(git status)"></a>文件状态(git status)</h3><pre><code>&gt; 颜色含义
+红色: 代表被添加或者修改的文件没有被添加到暂缓区
+绿色: 代表文件在暂缓区,等待提交
+&gt; 版本号的含义
+版本号是一个由SHA1生成的40位哈希值
+这样做的目的是保证版本号的唯一
+</code></pre><h3 id="vim编辑器的使用"><a href="#vim编辑器的使用" class="headerlink" title="vim编辑器的使用"></a>vim编辑器的使用</h3><p><img src="https://upload-images.jianshu.io/upload_images/1319536-f9ca1ff192816c5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="vim编辑器使用.png"></p>
+<pre><code>命令模式:等待编辑命令输入;所有输入的内容都被当做命令来执行
+插入模式:输入的所有内容都被显示,并被当做文件内容处理
+命令行模式:执行待定命令(保存文件并退出vim : wq   ; 强制退出不保存: q! )
+</code></pre><h3 id="日志查看配置"><a href="#日志查看配置" class="headerlink" title="日志查看配置"></a>日志查看配置</h3><pre><code>命令如下: 
+git config --global alias.lg &quot;log --color --graph --pretty=format:&apos;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)\&lt;%an\&gt;%Creset&apos; --abbrev-commit&quot;
+</code></pre><h3 id="配置别名"><a href="#配置别名" class="headerlink" title="配置别名"></a>配置别名</h3><pre><code>git config alias.st status
+git config alias.ci commit -m
+</code></pre><h3 id="–global的作用"><a href="#–global的作用" class="headerlink" title="–global的作用"></a>–global的作用</h3><pre><code>可以进行全局配置,所有的版本库共享此配置
+ 查看全局配置（桌面前往-&gt;个人-&gt;.gitconfig
+</code></pre><p>   <strong>个人电脑上建议使用全局配置</strong></p>
+<h1 id="Git命令行演练-团队开发"><a href="#Git命令行演练-团队开发" class="headerlink" title="Git命令行演练-团队开发"></a>Git命令行演练-团队开发</h1><p><strong>团队开发必须有一个共享库,这样成员之间才可以进行协作开发</strong></p>
+<h2 id="共享库分类"><a href="#共享库分类" class="headerlink" title="共享库分类"></a>共享库分类</h2><pre><code>&gt; 本地共享库(只能在本地面对面操作)
+    - 电脑文件夹/U盘/移动硬盘
+&gt; 远程共享库(可通过网络远程操作)
+    - 自己搭建Git服务器(**不建议**)
+    - 在Github上托管项目(** 建议**)
+        Github网址(https://github.com); 公开项目免费, 私有项目收费
+    - 在OSChina上托管项目(** 推荐**)
+        OSChina网址(https://git.oschina.net) 安全免费,在国内访问速度快
+</code></pre><h2 id="搭建本地共享库"><a href="#搭建本地共享库" class="headerlink" title="搭建本地共享库"></a>搭建本地共享库</h2><pre><code>原因: 多人合作开发,代码共享
+命令: git init —-bare
+</code></pre><h2 id="经理初始化项目到本地共享库"><a href="#经理初始化项目到本地共享库" class="headerlink" title="经理初始化项目到本地共享库"></a>经理初始化项目到本地共享库</h2><pre><code>命令: git clone 本地代码仓库地址
+</code></pre><h2 id="演示多人开发"><a href="#演示多人开发" class="headerlink" title="演示多人开发"></a>演示多人开发</h2><pre><code>&gt; 创建文件夹manager, niuda
+    命令:
+        mkdir manager 
+        mkdir niuda
+&gt; 分别进入到两个文件夹从共享库clone项目到本地
+    命令:
+        git clone 本地代码仓库地址
+        git clone 本地代码仓库地址
+&gt; 演练新增文件同步
+    命令:
+        touch person.h
+        git add .     
+        git commit -m “创建person.h”
+        git push    
+        git pull
+&gt; 演练修改文件同步
+    命令:
+        git add . 
+        git commit -m “注释”
+        git push
+        git pull
+&gt; 演练删除文件同步
+    命令:
+        git rm filename
+        git commit -m “注释”
+        git push       
+        git pull
+&gt; 演练冲突解决
+    命令:
+        git pull
+
+&gt; 演练忽略文件
+    命令:
+        touch .gitignore   
+        open .gitignore   加入忽略文件名
+        git add .     
+        git commit -m “注释”
+</code></pre><p> .gitignore文件配置规则:<br> <a href="http://www.cnblogs.com/haiq/archive/2012/12/26/2833746.html" target="_blank" rel="noopener">http://www.cnblogs.com/haiq/archive/2012/12/26/2833746.html</a></p>
+<h2 id="备注笔记"><a href="#备注笔记" class="headerlink" title="备注笔记"></a>备注笔记</h2><pre><code>&gt; 关于忽略文件
+    在真实开发中,配置.gitignore文件 ， 去github里面搜索gitignore 选择OC版本的，拷贝到本地仓库即可,记得添加到本地版本库
+
+&gt; 常见问题
+    fetch first 代表当前文件过期,需要从远程共享库更新 
+    git pull
+</code></pre><h1 id="Git-XCode演练-团队开发"><a href="#Git-XCode演练-团队开发" class="headerlink" title="Git-XCode演练-团队开发"></a>Git-XCode演练-团队开发</h1><h2 id="搭建本地共享版本库"><a href="#搭建本地共享版本库" class="headerlink" title="搭建本地共享版本库"></a>搭建本地共享版本库</h2><pre><code>命令: git init —-bare
+</code></pre><h2 id="经理初始化项目到共享版本库"><a href="#经理初始化项目到共享版本库" class="headerlink" title="经理初始化项目到共享版本库"></a>经理初始化项目到共享版本库</h2><pre><code>**注意: 添加忽略文件, 不然Xcode有可能会把没必要的文件提交**
+**必须在使用Xcode之前把忽略文件添加进来, 因为Xcode创建工程时, 默认直接把所有文件添加到暂缓区, 加进去之后忽略文件对其就无效了**
+</code></pre><h2 id="牛大-牛二使用Xcode-克隆项目"><a href="#牛大-牛二使用Xcode-克隆项目" class="headerlink" title="牛大,牛二使用Xcode 克隆项目"></a>牛大,牛二使用Xcode 克隆项目</h2><h2 id="演练添加文件同步"><a href="#演练添加文件同步" class="headerlink" title="演练添加文件同步"></a>演练添加文件同步</h2><h2 id="演练修改文件同步"><a href="#演练修改文件同步" class="headerlink" title="演练修改文件同步"></a>演练修改文件同步</h2><h2 id="演练删除文件同步"><a href="#演练删除文件同步" class="headerlink" title="演练删除文件同步"></a>演练删除文件同步</h2><h2 id="演练冲突"><a href="#演练冲突" class="headerlink" title="演练冲突"></a>演练冲突</h2><h1 id="github的使用"><a href="#github的使用" class="headerlink" title="github的使用"></a>github的使用</h1><h2 id="托管项目到github"><a href="#托管项目到github" class="headerlink" title="托管项目到github"></a>托管项目到github</h2><pre><code>1.打开github网站:https://www.github.com
+2.注册账号(OneShunzi)
+3.点击创建新仓库:https://github.com/new
+4.填入项目名称,描述等信息
+5.创建完成
+6.可根据生成的版本库地址进行克隆下来进行操作
+</code></pre><h2 id="怎样加入合作伙伴"><a href="#怎样加入合作伙伴" class="headerlink" title="怎样加入合作伙伴"></a>怎样加入合作伙伴</h2><pre><code>1.点击”个人” -&gt; setting -&gt; SSH keys -&gt; Add SSH key
+
+2.将你小伙伴生成的公钥添加进来即可.(以下是生成公钥私钥方法) 
+</code></pre><ul>
+<li><a href="https://help.github.com/articles/generating-ssh-keys/" target="_blank" rel="noopener">https://help.github.com/articles/generating-ssh-keys/
+</a></li>
+</ul>
+<h2 id="怎样将其他著名框架添加到我们的代码仓库"><a href="#怎样将其他著名框架添加到我们的代码仓库" class="headerlink" title="怎样将其他著名框架添加到我们的代码仓库?"></a>怎样将其他著名框架添加到我们的代码仓库?</h2><pre><code>1.搜索到对应的框架
+2.点击fork
+3.当项目被移到自己代码仓库中,就可以根据地址克隆下来进行操作
+</code></pre><p> <strong>注意:</strong></p>
+<pre><code>你可以针对此框架进行任意修改,但是仅仅作用在你的本地仓库中的副本,对原作者项目没有任何影响. 
+如果想向原作者提建议,可以直接使用,pull request操作.
+提交完成后,原作者可以在pull request中看到你的提交.至于是否采纳,就是原作者的意愿
+</code></pre><h1 id="OSChina的使用"><a href="#OSChina的使用" class="headerlink" title="OSChina的使用"></a>OSChina的使用</h1><h2 id="托管项目到OSChina"><a href="#托管项目到OSChina" class="headerlink" title="托管项目到OSChina"></a>托管项目到OSChina</h2><pre><code>1.打开oschina网站:[https://git.oschina.net]
+2.注册账号(OneShunzi)
+3.点击创建新仓库[https://git.oschina.net/projects/new]
+4.填入项目名称,描述等信息
+5.创建完成
+6.可根据生成的版本库地址进行克隆下来进行操作
+</code></pre><h2 id="怎样加入合作伙伴-1"><a href="#怎样加入合作伙伴-1" class="headerlink" title="怎样加入合作伙伴?"></a>怎样加入合作伙伴?</h2><pre><code>1.点击”管理”-&gt;项目成员管理-&gt;选择成员权限进行创建
+2.或者直接只用SSH(以下是生成公钥私钥方法)
+ &gt; 部署公钥允许以只读的方式访问项目，主要用于项目在生产服务器的部署上，免去HTTP方式每次操作都要输入密码和普通SSH方式担心不小心修改项目代码的麻烦。
+ &gt; https://help.github.com/articles/generating-ssh-keys/
+</code></pre><h2 id="怎样将其他著名框架添加到我们的代码仓库-1"><a href="#怎样将其他著名框架添加到我们的代码仓库-1" class="headerlink" title="怎样将其他著名框架添加到我们的代码仓库?"></a>怎样将其他著名框架添加到我们的代码仓库?</h2><pre><code>1.搜索到对应的框架
+2.点击fork
+3.当项目被移到自己代码仓库中,就可以根据地址克隆下来进行操作
+</code></pre><p> <strong>注意:</strong></p>
+<pre><code>你可以针对此框架进行任意修改,但是仅仅作用在你的本地仓库中的副本,对原作者项目没有任何影响. 
+如果想向原作者提建议,可以直接使用,pull request操作.
+提交完成后,原作者可以在pull request中看到你的提交.至于是否采纳,就是原作者的意愿
+</code></pre><h1 id="新人服务器搭建-补充了解"><a href="#新人服务器搭建-补充了解" class="headerlink" title="新人服务器搭建(补充了解)"></a>新人服务器搭建(补充了解)</h1><h2 id="新人服务器搭建概念原因"><a href="#新人服务器搭建概念原因" class="headerlink" title="新人服务器搭建概念原因?"></a>新人服务器搭建概念原因?</h2><pre><code>概念: 搭建一个临时共享版本库, 供新人专用
+原因: 防止新人刚到时，搞乱服务器上的项目
+</code></pre><h2 id="新建一个文件夹，newBee，作为新人服务器"><a href="#新建一个文件夹，newBee，作为新人服务器" class="headerlink" title="新建一个文件夹，newBee，作为新人服务器"></a>新建一个文件夹，newBee，作为新人服务器</h2><h2 id="进入文件夹-使用git-init-—-bare-初始化仓库"><a href="#进入文件夹-使用git-init-—-bare-初始化仓库" class="headerlink" title="进入文件夹 使用git init —-bare 初始化仓库"></a>进入文件夹 使用git init —-bare 初始化仓库</h2><h2 id="经理打开自己项目所在文件夹，执行PULL-更新到最新"><a href="#经理打开自己项目所在文件夹，执行PULL-更新到最新" class="headerlink" title="经理打开自己项目所在文件夹，执行PULL ,更新到最新"></a>经理打开自己项目所在文件夹，执行PULL ,更新到最新</h2><h2 id="然后source-control-gt-项目master-gt-configure-项目"><a href="#然后source-control-gt-项目master-gt-configure-项目" class="headerlink" title="然后source control -&gt;项目master -&gt; configure 项目"></a>然后source control -&gt;项目master -&gt; configure 项目</h2><pre><code>&gt; 选择Remotes 选项 代表当前所连的远程服务器地址
+&gt; 点击+号 添加 将newBee文件路径作为另外一个远程服务器地址 file:// 协议开头 结尾以/结尾
+&gt; Done
+</code></pre><h3 id="经理将最新代码提交到新人远程仓库"><a href="#经理将最新代码提交到新人远程仓库" class="headerlink" title="经理将最新代码提交到新人远程仓库"></a>经理将最新代码提交到新人远程仓库</h3><h3 id="经理分配新人服务器地址给新人"><a href="#经理分配新人服务器地址给新人" class="headerlink" title="经理分配新人服务器地址给新人"></a>经理分配新人服务器地址给新人</h3><h3 id="新人各种折腾"><a href="#新人各种折腾" class="headerlink" title="新人各种折腾"></a>新人各种折腾</h3><h3 id="经理建立文件夹，从新人服务器下载代码检查"><a href="#经理建立文件夹，从新人服务器下载代码检查" class="headerlink" title="经理建立文件夹，从新人服务器下载代码检查"></a>经理建立文件夹，从新人服务器下载代码检查</h3><h3 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h3><p><img src="https://upload-images.jianshu.io/upload_images/1319536-3c6633493858cad7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="新人服务器搭建.png"></p>
+<h1 id="Git版本备份-分支管理-补充了解"><a href="#Git版本备份-分支管理-补充了解" class="headerlink" title="Git版本备份/分支管理(补充了解)"></a>Git版本备份/分支管理(补充了解)</h1><p><strong>在git中不是通过拷贝代码来解决备份和开启分支的  git 直接打标签， 通过控制head指向，来回到任一版本</strong></p>
+<h2 id="版本备份"><a href="#版本备份" class="headerlink" title="版本备份"></a>版本备份</h2><h3 id="建立共享库"><a href="#建立共享库" class="headerlink" title="建立共享库"></a>建立共享库</h3><pre><code>&gt; 创建文件夹shareWeibo
+&gt; 进入文件夹后,初始化共享库
+git init ——bare
+</code></pre><h3 id="经理克隆项目后开发完1-0版本-打标签后-上传共享库"><a href="#经理克隆项目后开发完1-0版本-打标签后-上传共享库" class="headerlink" title="经理克隆项目后开发完1.0版本,打标签后,上传共享库"></a>经理克隆项目后开发完1.0版本,打标签后,上传共享库</h3><pre><code>&gt; 创建manager文件夹
+
+&gt; 进入文件夹后
+git clone 共享库绝对路径
+
+&gt; 进入工作区,配置姓名,邮箱
+git config user.name “manager”
+git config user.email “manager@qq.com”
+
+&gt; 经理创建文件,并修改部分代码,提交代码,上传到共享库,完成v1.0版本
+touch main.c
+open main.c:: 打开后写入abc
+git add .
+git commit -m “完成1.0版本开发”
+git push
+
+&gt; 经理给此版本打标签,并将标签上传到共享库
+git tag -a v1.0 -m “标记1.0版本”
+git push origin v1.0
+
+&gt; 经理继续开发2.0版本......并提交
+git add .
+git commit -m “2.0部分功能”
+git push
+</code></pre><h2 id="已发布版本bug修复"><a href="#已发布版本bug修复" class="headerlink" title="已发布版本bug修复"></a>已发布版本bug修复</h2><p><strong>在以上步骤基础上做以下操作</strong></p>
+<h3 id="牛大克隆项目-根据1-0版本创建分支-修复bug"><a href="#牛大克隆项目-根据1-0版本创建分支-修复bug" class="headerlink" title="牛大克隆项目,根据1.0版本创建分支,修复bug"></a>牛大克隆项目,根据1.0版本创建分支,修复bug</h3><pre><code>&gt; 创建niuda文件夹
+&gt; 进入文件夹后
+git clone 共享库绝对路径
+&gt; 进入工作区,配置姓名,邮箱
+git config user.name “niuda”
+git config user.email “niuda@qq.com”
+&gt; 根据v1.0版本建立新分支v1.0fixbug并切换到此分支
+git checkout v1.0 -b v1.0fixbug::
+&gt; 修复bug后提交到本地版本库
+</code></pre><p><strong> 注意此处提交到的是HEAD指向的分支-v1.0fixbug</strong><br>     git add .<br>     git commit -m “修复bug”</p>
+<h3 id="牛大修复bug后-打标签v1-1作版本备份-并上传共享库"><a href="#牛大修复bug后-打标签v1-1作版本备份-并上传共享库" class="headerlink" title="牛大修复bug后,打标签v1.1作版本备份,并上传共享库"></a>牛大修复bug后,打标签v1.1作版本备份,并上传共享库</h3><pre><code>git tag -a v1.1 -m “1.1版本备份”
+git push origin v1.1
+</code></pre><h3 id="牛大上传整个分支到共享版本库"><a href="#牛大上传整个分支到共享版本库" class="headerlink" title="牛大上传整个分支到共享版本库"></a>牛大上传整个分支到共享版本库</h3><pre><code>git push origin v1.0fixbug
+</code></pre><hr>
+<p><strong>—至此,分支修复bug结束,下面经理要合并分支—</strong></p>
+<h3 id="经理从共享库更新代码到本地库"><a href="#经理从共享库更新代码到本地库" class="headerlink" title="经理从共享库更新代码到本地库"></a>经理从共享库更新代码到本地库</h3><pre><code>git pull
+</code></pre><h3 id="经理查看当前服务器都有哪些分支"><a href="#经理查看当前服务器都有哪些分支" class="headerlink" title="经理查看当前服务器都有哪些分支"></a>经理查看当前服务器都有哪些分支</h3><pre><code>git branch -r
+</code></pre><h3 id="经理切换到master分支后-将v1-0fixbug分支合并过来"><a href="#经理切换到master分支后-将v1-0fixbug分支合并过来" class="headerlink" title="经理切换到master分支后,将v1.0fixbug分支合并过来"></a>经理切换到master分支后,将v1.0fixbug分支合并过来</h3><pre><code>git checkout master
+git merge origin/v1.0fixbug -m “合并分支”
+</code></pre><h3 id="经理合并完成后提交到共享库"><a href="#经理合并完成后提交到共享库" class="headerlink" title="经理合并完成后提交到共享库"></a>经理合并完成后提交到共享库</h3><pre><code>git add .
+git commit -m “合并分支”
+git push
+</code></pre><h3 id="合并完成后-可以删除共享库的分支"><a href="#合并完成后-可以删除共享库的分支" class="headerlink" title="合并完成后,可以删除共享库的分支"></a>合并完成后,可以删除共享库的分支</h3><pre><code>git branch -r -d origin/v1.0fixbug
+</code></pre><h3 id="查看版本标签-至此结束"><a href="#查看版本标签-至此结束" class="headerlink" title="查看版本标签,至此结束!!"></a>查看版本标签,至此结束!!</h3><pre><code>git tag
+</code></pre><h1 id="视频学习地址"><a href="#视频学习地址" class="headerlink" title="视频学习地址"></a>视频学习地址</h1><p><a href="https://pan.baidu.com/s/1zIIOVu63AIqLswlZuCt2UQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1zIIOVu63AIqLswlZuCt2UQ</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"># git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/导入环信SDK时碰到这个样的一个问题/" rel="next" title="导入环信SDK时碰到这个样的一个问题">
+                <i class="fa fa-chevron-left"></i> 导入环信SDK时碰到这个样的一个问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/code-push和code-push-server热更新上传到七牛云及阿里云/" rel="prev" title="code-push和code-push-server热更新上传到七牛云及阿里云">
+                code-push和code-push-server热更新上传到七牛云及阿里云 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.gif" alt="阵浊秀">
+            
+              <p class="site-author-name" itemprop="name">阵浊秀</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/yuhangjob" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:yuhangjobmail@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#git概述"><span class="nav-number">1.</span> <span class="nav-text">git概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#git简介"><span class="nav-number">1.1.</span> <span class="nav-text">git简介?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的源代码管理工具有哪些"><span class="nav-number">1.2.</span> <span class="nav-text">常见的源代码管理工具有哪些?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集中式版本控制"><span class="nav-number">1.3.</span> <span class="nav-text">集中式版本控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式版本控制"><span class="nav-number">1.4.</span> <span class="nav-text">分布式版本控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-和-svn的简单对比"><span class="nav-number">1.5.</span> <span class="nav-text">git 和 svn的简单对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVN工作流程和GIT工作流程对比"><span class="nav-number">1.6.</span> <span class="nav-text">SVN工作流程和GIT工作流程对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作原理"><span class="nav-number">1.7.</span> <span class="nav-text">工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git使用环境"><span class="nav-number">1.8.</span> <span class="nav-text">git使用环境</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git命令行演练-个人开发"><span class="nav-number">2.</span> <span class="nav-text">Git命令行演练-个人开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何学习git指令"><span class="nav-number">2.1.</span> <span class="nav-text">如何学习git指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化一个本地仓库"><span class="nav-number">2.2.</span> <span class="nav-text">初始化一个本地仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置仓库"><span class="nav-number">2.3.</span> <span class="nav-text">配置仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人开发演练"><span class="nav-number">2.4.</span> <span class="nav-text">个人开发演练</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备注补充"><span class="nav-number">2.5.</span> <span class="nav-text">备注补充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件状态-git-status"><span class="nav-number">2.5.1.</span> <span class="nav-text">文件状态(git status)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim编辑器的使用"><span class="nav-number">2.5.2.</span> <span class="nav-text">vim编辑器的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志查看配置"><span class="nav-number">2.5.3.</span> <span class="nav-text">日志查看配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置别名"><span class="nav-number">2.5.4.</span> <span class="nav-text">配置别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#–global的作用"><span class="nav-number">2.5.5.</span> <span class="nav-text">–global的作用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git命令行演练-团队开发"><span class="nav-number">3.</span> <span class="nav-text">Git命令行演练-团队开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#共享库分类"><span class="nav-number">3.1.</span> <span class="nav-text">共享库分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建本地共享库"><span class="nav-number">3.2.</span> <span class="nav-text">搭建本地共享库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#经理初始化项目到本地共享库"><span class="nav-number">3.3.</span> <span class="nav-text">经理初始化项目到本地共享库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#演示多人开发"><span class="nav-number">3.4.</span> <span class="nav-text">演示多人开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备注笔记"><span class="nav-number">3.5.</span> <span class="nav-text">备注笔记</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-XCode演练-团队开发"><span class="nav-number">4.</span> <span class="nav-text">Git-XCode演练-团队开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建本地共享版本库"><span class="nav-number">4.1.</span> <span class="nav-text">搭建本地共享版本库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#经理初始化项目到共享版本库"><span class="nav-number">4.2.</span> <span class="nav-text">经理初始化项目到共享版本库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#牛大-牛二使用Xcode-克隆项目"><span class="nav-number">4.3.</span> <span class="nav-text">牛大,牛二使用Xcode 克隆项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#演练添加文件同步"><span class="nav-number">4.4.</span> <span class="nav-text">演练添加文件同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#演练修改文件同步"><span class="nav-number">4.5.</span> <span class="nav-text">演练修改文件同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#演练删除文件同步"><span class="nav-number">4.6.</span> <span class="nav-text">演练删除文件同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#演练冲突"><span class="nav-number">4.7.</span> <span class="nav-text">演练冲突</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#github的使用"><span class="nav-number">5.</span> <span class="nav-text">github的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#托管项目到github"><span class="nav-number">5.1.</span> <span class="nav-text">托管项目到github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#怎样加入合作伙伴"><span class="nav-number">5.2.</span> <span class="nav-text">怎样加入合作伙伴</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#怎样将其他著名框架添加到我们的代码仓库"><span class="nav-number">5.3.</span> <span class="nav-text">怎样将其他著名框架添加到我们的代码仓库?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OSChina的使用"><span class="nav-number">6.</span> <span class="nav-text">OSChina的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#托管项目到OSChina"><span class="nav-number">6.1.</span> <span class="nav-text">托管项目到OSChina</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#怎样加入合作伙伴-1"><span class="nav-number">6.2.</span> <span class="nav-text">怎样加入合作伙伴?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#怎样将其他著名框架添加到我们的代码仓库-1"><span class="nav-number">6.3.</span> <span class="nav-text">怎样将其他著名框架添加到我们的代码仓库?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新人服务器搭建-补充了解"><span class="nav-number">7.</span> <span class="nav-text">新人服务器搭建(补充了解)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#新人服务器搭建概念原因"><span class="nav-number">7.1.</span> <span class="nav-text">新人服务器搭建概念原因?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新建一个文件夹，newBee，作为新人服务器"><span class="nav-number">7.2.</span> <span class="nav-text">新建一个文件夹，newBee，作为新人服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进入文件夹-使用git-init-—-bare-初始化仓库"><span class="nav-number">7.3.</span> <span class="nav-text">进入文件夹 使用git init —-bare 初始化仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#经理打开自己项目所在文件夹，执行PULL-更新到最新"><span class="nav-number">7.4.</span> <span class="nav-text">经理打开自己项目所在文件夹，执行PULL ,更新到最新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#然后source-control-gt-项目master-gt-configure-项目"><span class="nav-number">7.5.</span> <span class="nav-text">然后source control -&gt;项目master -&gt; configure 项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#经理将最新代码提交到新人远程仓库"><span class="nav-number">7.5.1.</span> <span class="nav-text">经理将最新代码提交到新人远程仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经理分配新人服务器地址给新人"><span class="nav-number">7.5.2.</span> <span class="nav-text">经理分配新人服务器地址给新人</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新人各种折腾"><span class="nav-number">7.5.3.</span> <span class="nav-text">新人各种折腾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经理建立文件夹，从新人服务器下载代码检查"><span class="nav-number">7.5.4.</span> <span class="nav-text">经理建立文件夹，从新人服务器下载代码检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图解"><span class="nav-number">7.5.5.</span> <span class="nav-text">图解</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git版本备份-分支管理-补充了解"><span class="nav-number">8.</span> <span class="nav-text">Git版本备份/分支管理(补充了解)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本备份"><span class="nav-number">8.1.</span> <span class="nav-text">版本备份</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建立共享库"><span class="nav-number">8.1.1.</span> <span class="nav-text">建立共享库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经理克隆项目后开发完1-0版本-打标签后-上传共享库"><span class="nav-number">8.1.2.</span> <span class="nav-text">经理克隆项目后开发完1.0版本,打标签后,上传共享库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#已发布版本bug修复"><span class="nav-number">8.2.</span> <span class="nav-text">已发布版本bug修复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#牛大克隆项目-根据1-0版本创建分支-修复bug"><span class="nav-number">8.2.1.</span> <span class="nav-text">牛大克隆项目,根据1.0版本创建分支,修复bug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#牛大修复bug后-打标签v1-1作版本备份-并上传共享库"><span class="nav-number">8.2.2.</span> <span class="nav-text">牛大修复bug后,打标签v1.1作版本备份,并上传共享库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#牛大上传整个分支到共享版本库"><span class="nav-number">8.2.3.</span> <span class="nav-text">牛大上传整个分支到共享版本库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经理从共享库更新代码到本地库"><span class="nav-number">8.2.4.</span> <span class="nav-text">经理从共享库更新代码到本地库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经理查看当前服务器都有哪些分支"><span class="nav-number">8.2.5.</span> <span class="nav-text">经理查看当前服务器都有哪些分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经理切换到master分支后-将v1-0fixbug分支合并过来"><span class="nav-number">8.2.6.</span> <span class="nav-text">经理切换到master分支后,将v1.0fixbug分支合并过来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经理合并完成后提交到共享库"><span class="nav-number">8.2.7.</span> <span class="nav-text">经理合并完成后提交到共享库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合并完成后-可以删除共享库的分支"><span class="nav-number">8.2.8.</span> <span class="nav-text">合并完成后,可以删除共享库的分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看版本标签-至此结束"><span class="nav-number">8.2.9.</span> <span class="nav-text">查看版本标签,至此结束!!</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#视频学习地址"><span class="nav-number">9.</span> <span class="nav-text">视频学习地址</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"> &copy; 2015 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">阵浊秀</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://yuhangjob.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'http://yuhangjob.top/Git使用/';
+        this.page.identifier = 'Git使用/';
+        this.page.title = 'Git使用';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://yuhangjob.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+</body>
+</html>
