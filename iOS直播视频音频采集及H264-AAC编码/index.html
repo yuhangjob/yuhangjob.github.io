@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本人也是刚接触直播参考网上的资料的学习一下，有很多不足之处敬请谅解！ 附Demo地址:https://github.com/yuhangjob/VideoAndAudioCapture">
+<meta name="keywords" content="Object-C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS直播视频音频采集及H264 AAC编码">
+<meta property="og:url" content="http://yuhangjob.top/iOS直播视频音频采集及H264-AAC编码/index.html">
+<meta property="og:site_name" content="YH&#39;S Develop Blog">
+<meta property="og:description" content="本人也是刚接触直播参考网上的资料的学习一下，有很多不足之处敬请谅解！ 附Demo地址:https://github.com/yuhangjob/VideoAndAudioCapture">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1319536-0f564a820a88fd99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-07-05T07:04:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS直播视频音频采集及H264 AAC编码">
+<meta name="twitter:description" content="本人也是刚接触直播参考网上的资料的学习一下，有很多不足之处敬请谅解！ 附Demo地址:https://github.com/yuhangjob/VideoAndAudioCapture">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1319536-0f564a820a88fd99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yuhangjob.top/iOS直播视频音频采集及H264-AAC编码/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>iOS直播视频音频采集及H264 AAC编码 | YH'S Develop Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YH'S Develop Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuhangjob.top/iOS直播视频音频采集及H264-AAC编码/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="benane">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YH'S Develop Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS直播视频音频采集及H264 AAC编码
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-07-05 15:04:51" itemprop="dateCreated datePublished" datetime="2016-07-05T15:04:51+08:00">2016-07-05</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/iOS开发记录/" itemprop="url" rel="index"><span itemprop="name">iOS开发记录</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/iOS直播视频音频采集及H264-AAC编码/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="iOS直播视频音频采集及H264-AAC编码/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本人也是刚接触直播参考网上的资料的学习一下，有很多不足之处敬请谅解！</p>
+<p>附Demo地址:<br><a href="https://github.com/yuhangjob/VideoAndAudioCapture" target="_blank" rel="noopener">https://github.com/yuhangjob/VideoAndAudioCapture</a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1319536-0f564a820a88fd99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2016-07-05 11.01.00.png"><br><a id="more"></a></p>
+<h5 id="H264编码-h"><a href="#H264编码-h" class="headerlink" title="H264编码.h"></a>H264编码.h</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">//  H264Encoder.h</span><br><span class="line">//  AVCaptureSession</span><br><span class="line">//</span><br><span class="line">//  Created by 刘宇航 on 16/7/4.</span><br><span class="line">//  Copyright © 2016年 刘宇航. All rights reserved.</span><br><span class="line">//</span><br><span class="line"></span><br><span class="line"><span class="comment">#import &lt;Foundation/Foundation.h&gt;</span></span><br><span class="line"><span class="comment">#import &lt;AVFoundation/AVFoundation.h&gt;</span></span><br><span class="line"><span class="comment">#import &lt;VideoToolbox/VideoToolbox.h&gt;</span></span><br><span class="line"></span><br><span class="line">@protocol H264EncoderDelegate &lt;NSObject&gt;</span><br><span class="line"></span><br><span class="line">- (void)gotSpsPps:(NSData*)sps pps:(NSData*)pps;</span><br><span class="line">- (void)gotEncodedData:(NSData*)data isKeyFrame:(BOOL)isKeyFrame;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line">@interface H264Encoder : NSObject</span><br><span class="line"></span><br><span class="line">- (void) initWithConfiguration;</span><br><span class="line">- (void) start:(int)width  height:(int)height;</span><br><span class="line">- (void) initEncode:(int)width  height:(int)height;</span><br><span class="line">- (void) encode:(CMSampleBufferRef )sampleBuffer;</span><br><span class="line">- (void) End;</span><br><span class="line"></span><br><span class="line">@property (weak, nonatomic) NSString *error;</span><br><span class="line">@property (weak, nonatomic) id&lt;H264EncoderDelegate&gt; delegate;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h5 id="H264编码-m"><a href="#H264编码-m" class="headerlink" title="H264编码.m"></a>H264编码.m</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">//  H264Encoder.m</span><br><span class="line">//  AVCaptureSession</span><br><span class="line">//</span><br><span class="line">//  Created by 刘宇航 on 16/7/4.</span><br><span class="line">//  Copyright © 2016年 刘宇航. All rights reserved.</span><br><span class="line">//</span><br><span class="line"></span><br><span class="line"><span class="comment">#import "H264Encoder.h"</span></span><br><span class="line"></span><br><span class="line">@implementation H264Encoder</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    NSString * yuvFile;</span><br><span class="line">    VTCompressionSessionRef EncodingSession;</span><br><span class="line">    dispatch_queue_t aQueue;</span><br><span class="line">    CMFormatDescriptionRef  format;</span><br><span class="line">    CMSampleTimingInfo * timingInfo;</span><br><span class="line">    BOOL initialized;</span><br><span class="line">    int  frameCount;</span><br><span class="line">    NSData *sps;</span><br><span class="line">    NSData *pps;</span><br><span class="line">&#125;</span><br><span class="line">@synthesize error;</span><br><span class="line"></span><br><span class="line">- (void) initWithConfiguration</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">    EncodingSession = nil;</span><br><span class="line">    initialized = <span class="literal">true</span>;</span><br><span class="line">    aQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line">    frameCount = 0;</span><br><span class="line">    sps = NULL;</span><br><span class="line">    pps = NULL;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void didCompressH264(void *outputCallbackRefCon, void *sourceFrameRefCon, OSStatus status, VTEncodeInfoFlags infoFlags,</span><br><span class="line">                     CMSampleBufferRef sampleBuffer )</span><br><span class="line">&#123;</span><br><span class="line">    //    NSLog(@<span class="string">"didCompressH264 called with status %d infoFlags %d"</span>, (int)status, (int)infoFlags);</span><br><span class="line">    <span class="keyword">if</span> (status != 0) <span class="built_in">return</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (!CMSampleBufferDataIsReady(sampleBuffer))</span><br><span class="line">    &#123;</span><br><span class="line">        NSLog(@<span class="string">"didCompressH264 data is not ready "</span>);</span><br><span class="line">        <span class="built_in">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    H264Encoder* encoder = (__bridge H264Encoder*)outputCallbackRefCon;</span><br><span class="line">    </span><br><span class="line">    // Check <span class="keyword">if</span> we have got a key frame first</span><br><span class="line">    bool keyframe = !CFDictionaryContainsKey( (CFArrayGetValueAtIndex(CMSampleBufferGetSampleAttachmentsArray(sampleBuffer, <span class="literal">true</span>), 0)), kCMSampleAttachmentKey_NotSync);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (keyframe)</span><br><span class="line">    &#123;</span><br><span class="line">        CMFormatDescriptionRef format = CMSampleBufferGetFormatDescription(sampleBuffer);</span><br><span class="line">        // CFDictionaryRef extensionDict = CMFormatDescriptionGetExtensions(format);</span><br><span class="line">        // Get the extensions</span><br><span class="line">        // From the extensions get the dictionary with key <span class="string">"SampleDescriptionExtensionAtoms"</span></span><br><span class="line">        // From the dict, get the value <span class="keyword">for</span> the key <span class="string">"avcC"</span></span><br><span class="line">        </span><br><span class="line">        size_t sparameterSetSize, sparameterSetCount;</span><br><span class="line">        const uint8_t *sparameterSet;</span><br><span class="line">        OSStatus statusCode = CMVideoFormatDescriptionGetH264ParameterSetAtIndex(format, 0, &amp;sparameterSet, &amp;sparameterSetSize, &amp;sparameterSetCount, 0 );</span><br><span class="line">        <span class="keyword">if</span> (statusCode == noErr)</span><br><span class="line">        &#123;</span><br><span class="line">            // Found sps and now check <span class="keyword">for</span> pps</span><br><span class="line">            size_t pparameterSetSize, pparameterSetCount;</span><br><span class="line">            const uint8_t *pparameterSet;</span><br><span class="line">            OSStatus statusCode = CMVideoFormatDescriptionGetH264ParameterSetAtIndex(format, 1, &amp;pparameterSet, &amp;pparameterSetSize, &amp;pparameterSetCount, 0 );</span><br><span class="line">            <span class="keyword">if</span> (statusCode == noErr)</span><br><span class="line">            &#123;</span><br><span class="line">                // Found pps</span><br><span class="line">                encoder-&gt;sps = [NSData dataWithBytes:sparameterSet length:sparameterSetSize];</span><br><span class="line">                encoder-&gt;pps = [NSData dataWithBytes:pparameterSet length:pparameterSetSize];</span><br><span class="line">                <span class="keyword">if</span> (encoder-&gt;_delegate)</span><br><span class="line">                &#123;</span><br><span class="line">                    [encoder-&gt;_delegate gotSpsPps:encoder-&gt;sps pps:encoder-&gt;pps];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    CMBlockBufferRef dataBuffer = CMSampleBufferGetDataBuffer(sampleBuffer);</span><br><span class="line">    size_t length, totalLength;</span><br><span class="line">    char *dataPointer;</span><br><span class="line">    OSStatus statusCodeRet = CMBlockBufferGetDataPointer(dataBuffer, 0, &amp;length, &amp;totalLength, &amp;dataPointer);</span><br><span class="line">    <span class="keyword">if</span> (statusCodeRet == noErr) &#123;</span><br><span class="line">        </span><br><span class="line">        size_t bufferOffset = 0;</span><br><span class="line">        static const int AVCCHeaderLength = 4;</span><br><span class="line">        <span class="keyword">while</span> (bufferOffset &lt; totalLength - AVCCHeaderLength) &#123;</span><br><span class="line">            </span><br><span class="line">            // Read the NAL unit length</span><br><span class="line">            uint32_t NALUnitLength = 0;</span><br><span class="line">            memcpy(&amp;NALUnitLength, dataPointer + bufferOffset, AVCCHeaderLength);</span><br><span class="line">            </span><br><span class="line">            // Convert the length value from Big-endian to Little-endian</span><br><span class="line">            NALUnitLength = CFSwapInt32BigToHost(NALUnitLength);</span><br><span class="line">            </span><br><span class="line">            NSData* data = [[NSData alloc] initWithBytes:(dataPointer + bufferOffset + AVCCHeaderLength) length:NALUnitLength];</span><br><span class="line">            [encoder-&gt;_delegate gotEncodedData:data isKeyFrame:keyframe];</span><br><span class="line">            </span><br><span class="line">            // Move to the next NAL unit <span class="keyword">in</span> the block buffer</span><br><span class="line">            bufferOffset += AVCCHeaderLength + NALUnitLength;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void) start:(int)width  height:(int)height</span><br><span class="line">&#123;</span><br><span class="line">    int frameSize = (width * height * 1.5);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (!initialized)</span><br><span class="line">    &#123;</span><br><span class="line">        NSLog(@<span class="string">"H264: Not initialized"</span>);</span><br><span class="line">        error = @<span class="string">"H264: Not initialized"</span>;</span><br><span class="line">        <span class="built_in">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    dispatch_sync(aQueue, ^&#123;</span><br><span class="line">        </span><br><span class="line">        // For testing out the logic, lets <span class="built_in">read</span> from a file and <span class="keyword">then</span> send it to encoder to create h264 stream</span><br><span class="line">        </span><br><span class="line">        // Create the compression session</span><br><span class="line">        OSStatus status = VTCompressionSessionCreate(NULL, width, height, kCMVideoCodecType_H264, NULL, NULL, NULL, didCompressH264, (__bridge void *)(self),  &amp;EncodingSession);</span><br><span class="line">        NSLog(@<span class="string">"H264: VTCompressionSessionCreate %d"</span>, (int)status);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (status != 0)</span><br><span class="line">        &#123;</span><br><span class="line">            NSLog(@<span class="string">"H264: Unable to create a H264 session"</span>);</span><br><span class="line">            error = @<span class="string">"H264: Unable to create a H264 session"</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">return</span> ;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        // Set the properties</span><br><span class="line">        VTSessionSetProperty(EncodingSession, kVTCompressionPropertyKey_RealTime, kCFBooleanTrue);</span><br><span class="line">        VTSessionSetProperty(EncodingSession, kVTCompressionPropertyKey_AllowFrameReordering, kCFBooleanFalse);</span><br><span class="line">        VTSessionSetProperty(EncodingSession, kVTCompressionPropertyKey_MaxKeyFrameInterval, 240);</span><br><span class="line">        </span><br><span class="line">        VTSessionSetProperty(EncodingSession, kVTCompressionPropertyKey_ProfileLevel, kVTProfileLevel_H264_High_AutoLevel);</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        // Tell the encoder to start encoding</span><br><span class="line">        VTCompressionSessionPrepareToEncodeFrames(EncodingSession);</span><br><span class="line">        </span><br><span class="line">        // Start reading from the file and copy it to the buffer</span><br><span class="line">        </span><br><span class="line">        // Open the file using POSIX as this is anyway a <span class="built_in">test</span> application</span><br><span class="line">        int fd = open([yuvFile UTF8String], O_RDONLY);</span><br><span class="line">        <span class="keyword">if</span> (fd == -1)</span><br><span class="line">        &#123;</span><br><span class="line">            NSLog(@<span class="string">"H264: Unable to open the file"</span>);</span><br><span class="line">            error = @<span class="string">"H264: Unable to open the file"</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        NSMutableData* theData = [[NSMutableData alloc] initWithLength:frameSize] ;</span><br><span class="line">        NSUInteger actualBytes = frameSize;</span><br><span class="line">        <span class="keyword">while</span> (actualBytes &gt; 0)</span><br><span class="line">        &#123;</span><br><span class="line">            void* buffer = [theData mutableBytes];</span><br><span class="line">            NSUInteger bufferSize = [theData length];</span><br><span class="line">            </span><br><span class="line">            actualBytes = <span class="built_in">read</span>(fd, buffer, bufferSize);</span><br><span class="line">            <span class="keyword">if</span> (actualBytes &lt; frameSize)</span><br><span class="line">                [theData setLength:actualBytes];</span><br><span class="line">            </span><br><span class="line">            frameCount++;</span><br><span class="line">            // Create a CM Block buffer out of this data</span><br><span class="line">            CMBlockBufferRef BlockBuffer = NULL;</span><br><span class="line">            OSStatus status = CMBlockBufferCreateWithMemoryBlock(NULL, buffer, actualBytes,kCFAllocatorNull, NULL, 0, actualBytes, kCMBlockBufferAlwaysCopyDataFlag, &amp;BlockBuffer);</span><br><span class="line">            </span><br><span class="line">            // Check <span class="keyword">for</span> error</span><br><span class="line">            <span class="keyword">if</span> (status != noErr)</span><br><span class="line">            &#123;</span><br><span class="line">                NSLog(@<span class="string">"H264: CMBlockBufferCreateWithMemoryBlock failed with %d"</span>, (int)status);</span><br><span class="line">                error = @<span class="string">"H264: CMBlockBufferCreateWithMemoryBlock failed "</span>;</span><br><span class="line">                </span><br><span class="line">                <span class="built_in">return</span> ;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            // Create a CM Sample Buffer</span><br><span class="line">            CMSampleBufferRef sampleBuffer = NULL;</span><br><span class="line">            CMFormatDescriptionRef formatDescription;</span><br><span class="line">            CMFormatDescriptionCreate ( kCFAllocatorDefault, // Allocator</span><br><span class="line">                                       kCMMediaType_Video,</span><br><span class="line">                                       <span class="string">'I420'</span>,</span><br><span class="line">                                       NULL,</span><br><span class="line">                                       &amp;formatDescription );</span><br><span class="line">            CMSampleTimingInfo sampleTimingInfo = &#123;CMTimeMake(1, 300)&#125;;</span><br><span class="line">            </span><br><span class="line">            OSStatus statusCode = CMSampleBufferCreate(kCFAllocatorDefault, BlockBuffer, YES, NULL, NULL, formatDescription, 1, 1, &amp;sampleTimingInfo, 0, NULL, &amp;sampleBuffer);</span><br><span class="line">            </span><br><span class="line">            // Check <span class="keyword">for</span> error</span><br><span class="line">            <span class="keyword">if</span> (statusCode != noErr) &#123;</span><br><span class="line">                NSLog(@<span class="string">"H264: CMSampleBufferCreate failed with %d"</span>, (int)statusCode);</span><br><span class="line">                error = @<span class="string">"H264: CMSampleBufferCreate failed "</span>;</span><br><span class="line">                </span><br><span class="line">                <span class="built_in">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            CFRelease(BlockBuffer);</span><br><span class="line">            BlockBuffer = NULL;</span><br><span class="line">            </span><br><span class="line">            // Get the CV Image buffer</span><br><span class="line">            CVImageBufferRef imageBuffer = (CVImageBufferRef)CMSampleBufferGetImageBuffer(sampleBuffer);</span><br><span class="line">            </span><br><span class="line">            // Create properties</span><br><span class="line">            CMTime presentationTimeStamp = CMTimeMake(frameCount, 300);</span><br><span class="line">            //CMTime duration = CMTimeMake(1, DURATION);</span><br><span class="line">            VTEncodeInfoFlags flags;</span><br><span class="line">            </span><br><span class="line">            // Pass it to the encoder</span><br><span class="line">            statusCode = VTCompressionSessionEncodeFrame(EncodingSession,</span><br><span class="line">                                                         imageBuffer,</span><br><span class="line">                                                         presentationTimeStamp,</span><br><span class="line">                                                         kCMTimeInvalid,</span><br><span class="line">                                                         NULL, NULL, &amp;flags);</span><br><span class="line">            // Check <span class="keyword">for</span> error</span><br><span class="line">            <span class="keyword">if</span> (statusCode != noErr) &#123;</span><br><span class="line">                NSLog(@<span class="string">"H264: VTCompressionSessionEncodeFrame failed with %d"</span>, (int)statusCode);</span><br><span class="line">                error = @<span class="string">"H264: VTCompressionSessionEncodeFrame failed "</span>;</span><br><span class="line">                </span><br><span class="line">                // End the session</span><br><span class="line">                VTCompressionSessionInvalidate(EncodingSession);</span><br><span class="line">                CFRelease(EncodingSession);</span><br><span class="line">                EncodingSession = NULL;</span><br><span class="line">                error = NULL;</span><br><span class="line">                <span class="built_in">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            //            NSLog(@<span class="string">"H264: VTCompressionSessionEncodeFrame Success"</span>);</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        // Mark the completion</span><br><span class="line">        VTCompressionSessionCompleteFrames(EncodingSession, kCMTimeInvalid);</span><br><span class="line">        </span><br><span class="line">        // End the session</span><br><span class="line">        VTCompressionSessionInvalidate(EncodingSession);</span><br><span class="line">        CFRelease(EncodingSession);</span><br><span class="line">        EncodingSession = NULL;</span><br><span class="line">        error = NULL;</span><br><span class="line">        </span><br><span class="line">        close(fd);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">- (void) initEncode:(int)width  height:(int)height</span><br><span class="line">&#123;</span><br><span class="line">    dispatch_sync(aQueue, ^&#123;</span><br><span class="line">        </span><br><span class="line">        // For testing out the logic, lets <span class="built_in">read</span> from a file and <span class="keyword">then</span> send it to encoder to create h264 stream</span><br><span class="line">        </span><br><span class="line">        // Create the compression session</span><br><span class="line">        OSStatus status = VTCompressionSessionCreate(NULL, width, height, kCMVideoCodecType_H264, NULL, NULL, NULL, didCompressH264, (__bridge void *)(self),  &amp;EncodingSession);</span><br><span class="line">        NSLog(@<span class="string">"H264: VTCompressionSessionCreate %d"</span>, (int)status);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (status != 0)</span><br><span class="line">        &#123;</span><br><span class="line">            NSLog(@<span class="string">"H264: Unable to create a H264 session"</span>);</span><br><span class="line">            error = @<span class="string">"H264: Unable to create a H264 session"</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">return</span> ;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        // Set the properties</span><br><span class="line">        VTSessionSetProperty(EncodingSession, kVTCompressionPropertyKey_RealTime, kCFBooleanTrue);</span><br><span class="line">        VTSessionSetProperty(EncodingSession, kVTCompressionPropertyKey_ProfileLevel, kVTProfileLevel_H264_Main_AutoLevel);</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        // Tell the encoder to start encoding</span><br><span class="line">        VTCompressionSessionPrepareToEncodeFrames(EncodingSession);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line">- (void) encode:(CMSampleBufferRef )sampleBuffer</span><br><span class="line">&#123;</span><br><span class="line">    dispatch_sync(aQueue, ^&#123;</span><br><span class="line">        </span><br><span class="line">        frameCount++;</span><br><span class="line">        // Get the CV Image buffer</span><br><span class="line">        CVImageBufferRef imageBuffer = (CVImageBufferRef)CMSampleBufferGetImageBuffer(sampleBuffer);</span><br><span class="line">        </span><br><span class="line">        // Create properties</span><br><span class="line">        CMTime presentationTimeStamp = CMTimeMake(frameCount, 1000);</span><br><span class="line">        //CMTime duration = CMTimeMake(1, DURATION);</span><br><span class="line">        VTEncodeInfoFlags flags;</span><br><span class="line">        </span><br><span class="line">        // Pass it to the encoder</span><br><span class="line">        OSStatus statusCode = VTCompressionSessionEncodeFrame(EncodingSession,</span><br><span class="line">                                                              imageBuffer,</span><br><span class="line">                                                              presentationTimeStamp,</span><br><span class="line">                                                              kCMTimeInvalid,</span><br><span class="line">                                                              NULL, NULL, &amp;flags);</span><br><span class="line">        // Check <span class="keyword">for</span> error</span><br><span class="line">        <span class="keyword">if</span> (statusCode != noErr) &#123;</span><br><span class="line">            NSLog(@<span class="string">"H264: VTCompressionSessionEncodeFrame failed with %d"</span>, (int)statusCode);</span><br><span class="line">            error = @<span class="string">"H264: VTCompressionSessionEncodeFrame failed "</span>;</span><br><span class="line">            </span><br><span class="line">            // End the session</span><br><span class="line">            VTCompressionSessionInvalidate(EncodingSession);</span><br><span class="line">            CFRelease(EncodingSession);</span><br><span class="line">            EncodingSession = NULL;</span><br><span class="line">            error = NULL;</span><br><span class="line">            <span class="built_in">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        //            NSLog(@<span class="string">"H264: VTCompressionSessionEncodeFrame Success"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void) End</span><br><span class="line">&#123;</span><br><span class="line">    // Mark the completion</span><br><span class="line">    VTCompressionSessionCompleteFrames(EncodingSession, kCMTimeInvalid);</span><br><span class="line">    </span><br><span class="line">    // End the session</span><br><span class="line">    VTCompressionSessionInvalidate(EncodingSession);</span><br><span class="line">    CFRelease(EncodingSession);</span><br><span class="line">    EncodingSession = NULL;</span><br><span class="line">    error = NULL;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h5 id="AAC编码-h"><a href="#AAC编码-h" class="headerlink" title="AAC编码.h"></a>AAC编码.h</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">//  AACEncoder.h</span><br><span class="line">//  AVCaptureSession</span><br><span class="line">//</span><br><span class="line">//  Created by 刘宇航 on 16/7/4.</span><br><span class="line">//  Copyright © 2016年 刘宇航. All rights reserved.</span><br><span class="line">//</span><br><span class="line"></span><br><span class="line"><span class="comment">#import &lt;Foundation/Foundation.h&gt;</span></span><br><span class="line"><span class="comment">#import &lt;AVFoundation/AVFoundation.h&gt;</span></span><br><span class="line"><span class="comment">#import &lt;AudioToolbox/AudioToolbox.h&gt;</span></span><br><span class="line"></span><br><span class="line">@interface AACEncoder : NSObject</span><br><span class="line"></span><br><span class="line">@property (nonatomic) dispatch_queue_t encoderQueue;</span><br><span class="line">@property (nonatomic) dispatch_queue_t callbackQueue;</span><br><span class="line"></span><br><span class="line">- (void) encodeSampleBuffer:(CMSampleBufferRef)sampleBuffer completionBlock:(void (^)(NSData *encodedData, NSError* error))completionBlock;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h5 id="AAC编码-m"><a href="#AAC编码-m" class="headerlink" title="AAC编码.m"></a>AAC编码.m</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">//  AACEncoder.m</span><br><span class="line">//  AVCaptureSession</span><br><span class="line">//</span><br><span class="line">//  Created by 刘宇航 on 16/7/4.</span><br><span class="line">//  Copyright © 2016年 刘宇航. All rights reserved.</span><br><span class="line">//</span><br><span class="line"></span><br><span class="line"><span class="comment">#import "AACEncoder.h"</span></span><br><span class="line"></span><br><span class="line">@interface AACEncoder()</span><br><span class="line">@property (nonatomic) AudioConverterRef audioConverter;</span><br><span class="line">@property (nonatomic) uint8_t *aacBuffer;</span><br><span class="line">@property (nonatomic) NSUInteger aacBufferSize;</span><br><span class="line">@property (nonatomic) char *pcmBuffer;</span><br><span class="line">@property (nonatomic) size_t pcmBufferSize;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation AACEncoder</span><br><span class="line"></span><br><span class="line">- (void) dealloc &#123;</span><br><span class="line">    AudioConverterDispose(_audioConverter);</span><br><span class="line">    free(_aacBuffer);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (id) init &#123;</span><br><span class="line">    <span class="keyword">if</span> (self = [super init]) &#123;</span><br><span class="line">        _encoderQueue = dispatch_queue_create(<span class="string">"AAC Encoder Queue"</span>, DISPATCH_QUEUE_SERIAL);</span><br><span class="line">        _callbackQueue = dispatch_queue_create(<span class="string">"AAC Encoder Callback Queue"</span>, DISPATCH_QUEUE_SERIAL);</span><br><span class="line">        _audioConverter = NULL;</span><br><span class="line">        _pcmBufferSize = 0;</span><br><span class="line">        _pcmBuffer = NULL;</span><br><span class="line">        _aacBufferSize = 1024;</span><br><span class="line">        _aacBuffer = malloc(_aacBufferSize * sizeof(uint8_t));</span><br><span class="line">        memset(_aacBuffer, 0, _aacBufferSize);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void) setupEncoderFromSampleBuffer:(CMSampleBufferRef)sampleBuffer &#123;</span><br><span class="line">    AudioStreamBasicDescription inAudioStreamBasicDescription = *CMAudioFormatDescriptionGetStreamBasicDescription((CMAudioFormatDescriptionRef)CMSampleBufferGetFormatDescription(sampleBuffer));</span><br><span class="line">    </span><br><span class="line">    AudioStreamBasicDescription outAudioStreamBasicDescription = &#123;0&#125;; // Always initialize the fields of a new audio stream basic description structure to zero, as shown here: ...</span><br><span class="line">    outAudioStreamBasicDescription.mSampleRate = inAudioStreamBasicDescription.mSampleRate; // The number of frames per second of the data <span class="keyword">in</span> the stream, when the stream is played at normal speed. For compressed formats, this field indicates the number of frames per second of equivalent decompressed data. The mSampleRate field must be nonzero, except when this structure is used <span class="keyword">in</span> a listing of supported formats (see “kAudioStreamAnyRate”).</span><br><span class="line">    outAudioStreamBasicDescription.mFormatID = kAudioFormatMPEG4AAC; // kAudioFormatMPEG4AAC_HE does not work. Can<span class="string">'t find `AudioClassDescription`. `mFormatFlags` is set to 0.</span></span><br><span class="line"><span class="string">    outAudioStreamBasicDescription.mFormatFlags = kMPEG4Object_AAC_LC; // Format-specific flags to specify details of the format. Set to 0 to indicate no format flags. See “Audio Data Format Identifiers” for the flags that apply to each format.</span></span><br><span class="line"><span class="string">    outAudioStreamBasicDescription.mBytesPerPacket = 0; // The number of bytes in a packet of audio data. To indicate variable packet size, set this field to 0. For a format that uses variable packet size, specify the size of each packet using an AudioStreamPacketDescription structure.</span></span><br><span class="line"><span class="string">    outAudioStreamBasicDescription.mFramesPerPacket = 1024; // The number of frames in a packet of audio data. For uncompressed audio, the value is 1. For variable bit-rate formats, the value is a larger fixed number, such as 1024 for AAC. For formats with a variable number of frames per packet, such as Ogg Vorbis, set this field to 0.</span></span><br><span class="line"><span class="string">    outAudioStreamBasicDescription.mBytesPerFrame = 0; // The number of bytes from the start of one frame to the start of the next frame in an audio buffer. Set this field to 0 for compressed formats. ...</span></span><br><span class="line"><span class="string">    outAudioStreamBasicDescription.mChannelsPerFrame = 1; // The number of channels in each frame of audio data. This value must be nonzero.</span></span><br><span class="line"><span class="string">    outAudioStreamBasicDescription.mBitsPerChannel = 0; // ... Set this field to 0 for compressed formats.</span></span><br><span class="line"><span class="string">    outAudioStreamBasicDescription.mReserved = 0; // Pads the structure out to force an even 8-byte alignment. Must be set to 0.</span></span><br><span class="line"><span class="string">    AudioClassDescription *description = [self</span></span><br><span class="line"><span class="string">                                          getAudioClassDescriptionWithType:kAudioFormatMPEG4AAC</span></span><br><span class="line"><span class="string">                                          fromManufacturer:kAppleSoftwareAudioCodecManufacturer];</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    OSStatus status = AudioConverterNewSpecific(&amp;inAudioStreamBasicDescription, &amp;outAudioStreamBasicDescription, 1, description, &amp;_audioConverter);</span></span><br><span class="line"><span class="string">    if (status != 0) &#123;</span></span><br><span class="line"><span class="string">        NSLog(@"setup converter: %d", (int)status);</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- (AudioClassDescription *)getAudioClassDescriptionWithType:(UInt32)type</span></span><br><span class="line"><span class="string">                                           fromManufacturer:(UInt32)manufacturer</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    static AudioClassDescription desc;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    UInt32 encoderSpecifier = type;</span></span><br><span class="line"><span class="string">    OSStatus st;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    UInt32 size;</span></span><br><span class="line"><span class="string">    st = AudioFormatGetPropertyInfo(kAudioFormatProperty_Encoders,</span></span><br><span class="line"><span class="string">                                    sizeof(encoderSpecifier),</span></span><br><span class="line"><span class="string">                                    &amp;encoderSpecifier,</span></span><br><span class="line"><span class="string">                                    &amp;size);</span></span><br><span class="line"><span class="string">    if (st) &#123;</span></span><br><span class="line"><span class="string">        NSLog(@"error getting audio format propery info: %d", (int)(st));</span></span><br><span class="line"><span class="string">        return nil;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    unsigned int count = size / sizeof(AudioClassDescription);</span></span><br><span class="line"><span class="string">    AudioClassDescription descriptions[count];</span></span><br><span class="line"><span class="string">    st = AudioFormatGetProperty(kAudioFormatProperty_Encoders,</span></span><br><span class="line"><span class="string">                                sizeof(encoderSpecifier),</span></span><br><span class="line"><span class="string">                                &amp;encoderSpecifier,</span></span><br><span class="line"><span class="string">                                &amp;size,</span></span><br><span class="line"><span class="string">                                descriptions);</span></span><br><span class="line"><span class="string">    if (st) &#123;</span></span><br><span class="line"><span class="string">        NSLog(@"error getting audio format propery: %d", (int)(st));</span></span><br><span class="line"><span class="string">        return nil;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    for (unsigned int i = 0; i &lt; count; i++) &#123;</span></span><br><span class="line"><span class="string">        if ((type == descriptions[i].mSubType) &amp;&amp;</span></span><br><span class="line"><span class="string">            (manufacturer == descriptions[i].mManufacturer)) &#123;</span></span><br><span class="line"><span class="string">            memcpy(&amp;desc, &amp;(descriptions[i]), sizeof(desc));</span></span><br><span class="line"><span class="string">            return &amp;desc;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    return nil;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">static OSStatus inInputDataProc(AudioConverterRef inAudioConverter, UInt32 *ioNumberDataPackets, AudioBufferList *ioData, AudioStreamPacketDescription **outDataPacketDescription, void *inUserData)</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    AACEncoder *encoder = (__bridge AACEncoder *)(inUserData);</span></span><br><span class="line"><span class="string">    UInt32 requestedPackets = *ioNumberDataPackets;</span></span><br><span class="line"><span class="string">    //NSLog(@"Number of packets requested: %d", (unsigned int)requestedPackets);</span></span><br><span class="line"><span class="string">    size_t copiedSamples = [encoder copyPCMSamplesIntoBuffer:ioData];</span></span><br><span class="line"><span class="string">    if (copiedSamples &lt; requestedPackets) &#123;</span></span><br><span class="line"><span class="string">        //NSLog(@"PCM buffer isn'</span>t full enough!<span class="string">");</span></span><br><span class="line"><span class="string">        *ioNumberDataPackets = 0;</span></span><br><span class="line"><span class="string">        return -1;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    *ioNumberDataPackets = 1;</span></span><br><span class="line"><span class="string">    //NSLog(@"</span>Copied %zu samples into ioData<span class="string">", copiedSamples);</span></span><br><span class="line"><span class="string">    return noErr;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- (size_t) copyPCMSamplesIntoBuffer:(AudioBufferList*)ioData &#123;</span></span><br><span class="line"><span class="string">    size_t originalBufferSize = _pcmBufferSize;</span></span><br><span class="line"><span class="string">    if (!originalBufferSize) &#123;</span></span><br><span class="line"><span class="string">        return 0;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    ioData-&gt;mBuffers[0].mData = _pcmBuffer;</span></span><br><span class="line"><span class="string">    ioData-&gt;mBuffers[0].mDataByteSize = _pcmBufferSize;</span></span><br><span class="line"><span class="string">    _pcmBuffer = NULL;</span></span><br><span class="line"><span class="string">    _pcmBufferSize = 0;</span></span><br><span class="line"><span class="string">    return originalBufferSize;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- (void) encodeSampleBuffer:(CMSampleBufferRef)sampleBuffer completionBlock:(void (^)(NSData * encodedData, NSError* error))completionBlock &#123;</span></span><br><span class="line"><span class="string">    CFRetain(sampleBuffer);</span></span><br><span class="line"><span class="string">    dispatch_async(_encoderQueue, ^&#123;</span></span><br><span class="line"><span class="string">        if (!_audioConverter) &#123;</span></span><br><span class="line"><span class="string">            [self setupEncoderFromSampleBuffer:sampleBuffer];</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        CMBlockBufferRef blockBuffer = CMSampleBufferGetDataBuffer(sampleBuffer);</span></span><br><span class="line"><span class="string">        CFRetain(blockBuffer);</span></span><br><span class="line"><span class="string">        OSStatus status = CMBlockBufferGetDataPointer(blockBuffer, 0, NULL, &amp;_pcmBufferSize, &amp;_pcmBuffer);</span></span><br><span class="line"><span class="string">        NSError *error = nil;</span></span><br><span class="line"><span class="string">        if (status != kCMBlockBufferNoErr) &#123;</span></span><br><span class="line"><span class="string">            error = [NSError errorWithDomain:NSOSStatusErrorDomain code:status userInfo:nil];</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        //NSLog(@"</span>PCM Buffer Size: %zu<span class="string">", _pcmBufferSize);</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">        memset(_aacBuffer, 0, _aacBufferSize);</span></span><br><span class="line"><span class="string">        AudioBufferList outAudioBufferList = &#123;0&#125;;</span></span><br><span class="line"><span class="string">        outAudioBufferList.mNumberBuffers = 1;</span></span><br><span class="line"><span class="string">        outAudioBufferList.mBuffers[0].mNumberChannels = 1;</span></span><br><span class="line"><span class="string">        outAudioBufferList.mBuffers[0].mDataByteSize = _aacBufferSize;</span></span><br><span class="line"><span class="string">        outAudioBufferList.mBuffers[0].mData = _aacBuffer;</span></span><br><span class="line"><span class="string">        AudioStreamPacketDescription *outPacketDescription = NULL;</span></span><br><span class="line"><span class="string">        UInt32 ioOutputDataPacketSize = 1;</span></span><br><span class="line"><span class="string">        status = AudioConverterFillComplexBuffer(_audioConverter, inInputDataProc, (__bridge void *)(self), &amp;ioOutputDataPacketSize, &amp;outAudioBufferList, outPacketDescription);</span></span><br><span class="line"><span class="string">        //NSLog(@"</span>ioOutputDataPacketSize: %d<span class="string">", (unsigned int)ioOutputDataPacketSize);</span></span><br><span class="line"><span class="string">        NSData *data = nil;</span></span><br><span class="line"><span class="string">        if (status == 0) &#123;</span></span><br><span class="line"><span class="string">            NSData *rawAAC = [NSData dataWithBytes:outAudioBufferList.mBuffers[0].mData length:outAudioBufferList.mBuffers[0].mDataByteSize];</span></span><br><span class="line"><span class="string">            NSData *adtsHeader = [self adtsDataForPacketLength:rawAAC.length];</span></span><br><span class="line"><span class="string">            NSMutableData *fullData = [NSMutableData dataWithData:adtsHeader];</span></span><br><span class="line"><span class="string">            [fullData appendData:rawAAC];</span></span><br><span class="line"><span class="string">            data = fullData;</span></span><br><span class="line"><span class="string">        &#125; else &#123;</span></span><br><span class="line"><span class="string">            error = [NSError errorWithDomain:NSOSStatusErrorDomain code:status userInfo:nil];</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        if (completionBlock) &#123;</span></span><br><span class="line"><span class="string">            dispatch_async(_callbackQueue, ^&#123;</span></span><br><span class="line"><span class="string">                completionBlock(data, error);</span></span><br><span class="line"><span class="string">            &#125;);</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        CFRelease(sampleBuffer);</span></span><br><span class="line"><span class="string">        CFRelease(blockBuffer);</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">/**</span></span><br><span class="line"><span class="string"> *  Add ADTS header at the beginning of each and every AAC packet.</span></span><br><span class="line"><span class="string"> *  This is needed as MediaCodec encoder generates a packet of raw</span></span><br><span class="line"><span class="string"> *  AAC data.</span></span><br><span class="line"><span class="string"> *</span></span><br><span class="line"><span class="string"> *  Note the packetLen must count in the ADTS header itself.</span></span><br><span class="line"><span class="string"> *  See: http://wiki.multimedia.cx/index.php?title=ADTS</span></span><br><span class="line"><span class="string"> *  Also: http://wiki.multimedia.cx/index.php?title=MPEG-4_Audio#Channel_Configurations</span></span><br><span class="line"><span class="string"> **/</span></span><br><span class="line"><span class="string">- (NSData*) adtsDataForPacketLength:(NSUInteger)packetLength &#123;</span></span><br><span class="line"><span class="string">    int adtsLength = 7;</span></span><br><span class="line"><span class="string">    char *packet = malloc(sizeof(char) * adtsLength);</span></span><br><span class="line"><span class="string">    // Variables Recycled by addADTStoPacket</span></span><br><span class="line"><span class="string">    int profile = 2;  //AAC LC</span></span><br><span class="line"><span class="string">    //39=MediaCodecInfo.CodecProfileLevel.AACObjectELD;</span></span><br><span class="line"><span class="string">    int freqIdx = 4;  //44.1KHz</span></span><br><span class="line"><span class="string">    int chanCfg = 1;  //MPEG-4 Audio Channel Configuration. 1 Channel front-center</span></span><br><span class="line"><span class="string">    NSUInteger fullLength = adtsLength + packetLength;</span></span><br><span class="line"><span class="string">    // fill in ADTS data</span></span><br><span class="line"><span class="string">    packet[0] = (char)0xFF; // 11111111     = syncword</span></span><br><span class="line"><span class="string">    packet[1] = (char)0xF9; // 1111 1 00 1  = syncword MPEG-2 Layer CRC</span></span><br><span class="line"><span class="string">    packet[2] = (char)(((profile-1)&lt;&lt;6) + (freqIdx&lt;&lt;2) +(chanCfg&gt;&gt;2));</span></span><br><span class="line"><span class="string">    packet[3] = (char)(((chanCfg&amp;3)&lt;&lt;6) + (fullLength&gt;&gt;11));</span></span><br><span class="line"><span class="string">    packet[4] = (char)((fullLength&amp;0x7FF) &gt;&gt; 3);</span></span><br><span class="line"><span class="string">    packet[5] = (char)(((fullLength&amp;7)&lt;&lt;5) + 0x1F);</span></span><br><span class="line"><span class="string">    packet[6] = (char)0xFC;</span></span><br><span class="line"><span class="string">    NSData *data = [NSData dataWithBytesNoCopy:packet length:adtsLength freeWhenDone:YES];</span></span><br><span class="line"><span class="string">    return data;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@end</span></span><br></pre></td></tr></table></figure>
+<h5 id="ViewController-m"><a href="#ViewController-m" class="headerlink" title="ViewController.m"></a>ViewController.m</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">//  ViewController.m</span><br><span class="line">//  AVCaptureSession</span><br><span class="line">//</span><br><span class="line">//  Created by 刘宇航 on 16/7/1.</span><br><span class="line">//  Copyright © 2016年 刘宇航. All rights reserved.</span><br><span class="line">//</span><br><span class="line"><span class="comment">#import "ViewController.h"</span></span><br><span class="line"><span class="comment">#import &lt;AVFoundation/AVFoundation.h&gt;</span></span><br><span class="line"><span class="comment">#import "AACEncoder.h"</span></span><br><span class="line"><span class="comment">#import "H264Encoder.h"</span></span><br><span class="line"><span class="comment">#import "avformat.h"</span></span><br><span class="line"><span class="comment">#define CAPTURE_FRAMES_PER_SECOND       20</span></span><br><span class="line"><span class="comment">#define SAMPLE_RATE                     44100</span></span><br><span class="line"><span class="comment">#define VideoWidth                      480</span></span><br><span class="line"><span class="comment">#define VideoHeight                     640</span></span><br><span class="line">@interface ViewController ()&lt;AVCaptureVideoDataOutputSampleBufferDelegate,AVCaptureAudioDataOutputSampleBufferDelegate,H264EncoderDelegate&gt;</span><br><span class="line">// 负责输如何输出设备之间的数据传递</span><br><span class="line">@property (nonatomic, strong) AVCaptureSession           *session;</span><br><span class="line">// 队列</span><br><span class="line">@property (nonatomic, strong) dispatch_queue_t           videoQueue;</span><br><span class="line">@property (nonatomic, strong) dispatch_queue_t           AudioQueue;</span><br><span class="line"></span><br><span class="line">// 负责从 AVCaptureDevice 获得输入数据</span><br><span class="line">@property (nonatomic, strong) AVCaptureDeviceInput       *captureDeviceInput;</span><br><span class="line">@property (nonatomic, strong) AVCaptureVideoDataOutput   *videoOutput;</span><br><span class="line">@property (nonatomic, strong) AVCaptureConnection        *videoConnection;</span><br><span class="line">@property (nonatomic, strong) AVCaptureConnection        *audioConnection;</span><br><span class="line">// 拍摄预览图层</span><br><span class="line">@property (nonatomic, strong) AVCaptureVideoPreviewLayer *previewLayer;</span><br><span class="line">@property (nonatomic, strong) H264Encoder                *h264Encoder;</span><br><span class="line">@property (nonatomic, strong) AACEncoder                 *aacEncoder;</span><br><span class="line">@property (nonatomic, strong) NSMutableData              *data;</span><br><span class="line">@property (nonatomic, copy  ) NSString                   *h264File;</span><br><span class="line">@property (nonatomic, strong) NSFileHandle               *fileHandle;</span><br><span class="line">@property (nonatomic, strong) UIButton                   *startBtn;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation ViewController</span><br><span class="line"></span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    _data = [NSMutableData new];</span><br><span class="line">    //初始化AVCaptureSession</span><br><span class="line">    _session = [AVCaptureSession new];</span><br><span class="line">    </span><br><span class="line">//    [self setupAudioCapture];</span><br><span class="line">//    [self setupVideoCapture];</span><br><span class="line">    [self initStartBtn];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#pragma mark - 设置音频</span></span><br><span class="line">- (void)setupAudioCapture &#123;</span><br><span class="line">    </span><br><span class="line">    self.aacEncoder = [AACEncoder new];</span><br><span class="line">    </span><br><span class="line">    AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];</span><br><span class="line">    </span><br><span class="line">    NSError *error = nil;</span><br><span class="line">    </span><br><span class="line">    AVCaptureDeviceInput *audioInput = [[AVCaptureDeviceInput alloc]initWithDevice:audioDevice error:&amp;error];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">        </span><br><span class="line">        NSLog(@<span class="string">"Error getting audio input device:%@"</span>,error.description);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> ([self.session canAddInput:audioInput]) &#123;</span><br><span class="line">        </span><br><span class="line">        [self.session addInput:audioInput];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    self.AudioQueue = dispatch_queue_create(<span class="string">"Audio Capture Queue"</span>, DISPATCH_QUEUE_SERIAL);</span><br><span class="line">    </span><br><span class="line">    AVCaptureAudioDataOutput *audioOutput = [AVCaptureAudioDataOutput new];</span><br><span class="line">    [audioOutput setSampleBufferDelegate:self queue:self.AudioQueue];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> ([self.session canAddOutput:audioOutput]) &#123;</span><br><span class="line">        </span><br><span class="line">        [self.session addOutput:audioOutput];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    self.audioConnection = [audioOutput connectionWithMediaType:AVMediaTypeAudio];</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">- (AVCaptureDevice *)cameraWithPosition:(AVCaptureDevicePosition)position</span><br><span class="line">&#123;</span><br><span class="line">    NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];</span><br><span class="line">    <span class="keyword">for</span> ( AVCaptureDevice *device <span class="keyword">in</span> devices )</span><br><span class="line">        <span class="keyword">if</span> ( device.position == position )</span><br><span class="line">            <span class="built_in">return</span> device;</span><br><span class="line">    <span class="built_in">return</span> nil;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#pragma mark - 设置视频 capture</span></span><br><span class="line">- (void)setupVideoCapture &#123;</span><br><span class="line">    </span><br><span class="line">   </span><br><span class="line">    self.h264Encoder = [H264Encoder new];</span><br><span class="line">    [self.h264Encoder initWithConfiguration];</span><br><span class="line">    [self.h264Encoder initEncode:480 height:640];</span><br><span class="line">    self.h264Encoder.delegate = self;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ([_session canSetSessionPreset:AVCaptureSessionPreset1280x720]) &#123;</span><br><span class="line">        // 设置分辨率</span><br><span class="line">        _session.sessionPreset = AVCaptureSessionPreset1280x720;</span><br><span class="line">    &#125;</span><br><span class="line">//</span><br><span class="line">    //设置采集的 Video 和 Audio 格式，这两个是分开设置的，也就是说，你可以只采集视频。</span><br><span class="line">    //配置采集输入源(摄像头)</span><br><span class="line">    </span><br><span class="line">    NSError *error = nil;</span><br><span class="line">    //获得一个采集设备, 例如前置/后置摄像头</span><br><span class="line">    AVCaptureDevice *videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];</span><br><span class="line">    </span><br><span class="line">//    videoDevice = [self cameraWithPosition:AVCaptureDevicePositionBack];</span><br><span class="line"> //   videoDevice.position = AVCaptureDevicePositionBack;</span><br><span class="line">    //用设备初始化一个采集的输入对象</span><br><span class="line">    AVCaptureDeviceInput *videoInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&amp;error];</span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">        NSLog(@<span class="string">"Error getting video input device:%@"</span>,error.description);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ([_session canAddInput:videoInput]) &#123;</span><br><span class="line">        [_session addInput:videoInput];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    //配置采集输出,即我们取得视频图像的接口</span><br><span class="line">    _videoQueue = dispatch_queue_create(<span class="string">"Video Capture Queue"</span>, DISPATCH_QUEUE_SERIAL);</span><br><span class="line">    _videoOutput = [AVCaptureVideoDataOutput new];</span><br><span class="line">    [_videoOutput setSampleBufferDelegate:self queue:_videoQueue];</span><br><span class="line">    </span><br><span class="line">    // 配置输出视频图像格式</span><br><span class="line">    NSDictionary *captureSettings = @&#123;(NSString*)kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_32BGRA)&#125;;</span><br><span class="line">    _videoOutput.videoSettings = captureSettings;</span><br><span class="line">    _videoOutput.alwaysDiscardsLateVideoFrames = YES;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> ([_session canAddOutput:_videoOutput]) &#123;</span><br><span class="line">        [_session addOutput:_videoOutput];</span><br><span class="line">    &#125;</span><br><span class="line">    // 保存Connection,用于SampleBufferDelegate中判断数据来源(video or audio?)</span><br><span class="line">    _videoConnection = [_videoOutput connectionWithMediaType:AVMediaTypeVideo];</span><br><span class="line">    </span><br><span class="line">    // 启动session</span><br><span class="line">    [_session startRunning];</span><br><span class="line">    //将当前硬件采集视频图像显示到屏幕</span><br><span class="line">    _previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_session];</span><br><span class="line">    _previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill; // 设置预览时的视频缩放方式</span><br><span class="line">    [[_previewLayer connection] setVideoOrientation:AVCaptureVideoOrientationPortrait]; // 设置视频的朝向</span><br><span class="line">    </span><br><span class="line">    _previewLayer.frame = CGRectMake(0, 20, self.view.frame.size.height, self.view.frame.size.height - 80);</span><br><span class="line">    [self.view.layer addSublayer:_previewLayer];</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    NSFileManager *fileManager = [NSFileManager defaultManager];</span><br><span class="line">    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);</span><br><span class="line">    NSString *documentsDirectory = [paths firstObject];</span><br><span class="line">    </span><br><span class="line">    self.h264File = [documentsDirectory stringByAppendingString:@<span class="string">"lyh.h264"</span>];</span><br><span class="line">    [fileManager removeItemAtPath:self.h264File error:nil];</span><br><span class="line">    [fileManager createFileAtPath:self.h264File contents:nil attributes:nil];</span><br><span class="line">    self.fileHandle = [NSFileHandle fileHandleForWritingAtPath:self.h264File];</span><br><span class="line">    </span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#pragma mark - 实现 AVCaptureOutputDelegate：</span></span><br><span class="line">- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection &#123;</span><br><span class="line">    </span><br><span class="line">    CMTime pts = CMSampleBufferGetDuration(sampleBuffer);</span><br><span class="line">    </span><br><span class="line">    double dPTS = (double)(pts.value) / pts.timescale;</span><br><span class="line">    NSLog(@<span class="string">"DPTS is %f"</span>,dPTS);</span><br><span class="line">    </span><br><span class="line">    // 这里的sampleBuffer就是采集到的数据了，但它是Video还是Audio的数据，得根据connection来判断</span><br><span class="line">    <span class="keyword">if</span> (connection == _videoConnection) &#123;  // Video</span><br><span class="line">        //NSLog(@<span class="string">"在这里获得video sampleBuffer，做进一步处理（编码H.264）"</span>);</span><br><span class="line">   </span><br><span class="line">         // 取得当前视频尺寸信息</span><br><span class="line">         CVPixelBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);</span><br><span class="line">         NSInteger width = CVPixelBufferGetWidth(pixelBuffer);</span><br><span class="line">         NSInteger height = CVPixelBufferGetHeight(pixelBuffer);</span><br><span class="line">        [self.h264Encoder encode:sampleBuffer];</span><br><span class="line">    </span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (connection == _audioConnection) &#123;  // Audio</span><br><span class="line">        </span><br><span class="line">        //NSLog(@<span class="string">"这里获得audio sampleBuffer，做进一步处理（编码AAC）"</span>);</span><br><span class="line">        </span><br><span class="line">        [self.aacEncoder encodeSampleBuffer:sampleBuffer completionBlock:^(NSData *encodedData, NSError *error) &#123;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (encodedData) &#123;</span><br><span class="line">                </span><br><span class="line">                NSLog(@<span class="string">"Audio data (%lu):%@"</span>, (unsigned long)encodedData.length,encodedData.description);</span><br><span class="line"><span class="comment">#pragma mark -  音频数据(encodedData)</span></span><br><span class="line">                [self.data appendData:encodedData];</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                </span><br><span class="line">                NSLog(@<span class="string">"Error encoding AAC: %@"</span>, error);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)gotSpsPps:(NSData*)sps pps:(NSData*)pps &#123;</span><br><span class="line">    </span><br><span class="line">    const char bytes[] = <span class="string">"\x00\x00\x00\x01"</span>;</span><br><span class="line">    size_t length = (sizeof bytes) - 1; //string literals have implicit trailing <span class="string">'\0'</span></span><br><span class="line">    NSData *ByteHeader = [NSData dataWithBytes:bytes length:length];</span><br><span class="line">    [_fileHandle writeData:ByteHeader];</span><br><span class="line">    [_fileHandle writeData:sps];</span><br><span class="line">    [_fileHandle writeData:ByteHeader];</span><br><span class="line">    [_fileHandle writeData:pps];</span><br><span class="line">    </span><br><span class="line">//    avformat_alloc_output_context2(&lt;<span class="comment">#AVFormatContext **ctx#&gt;, &lt;#AVOutputFormat *oformat#&gt;, &lt;#const char *format_name#&gt;, &lt;#const char *filename#&gt;)</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">- (void)gotEncodedData:(NSData*)data isKeyFrame:(BOOL)isKeyFrame &#123;</span><br><span class="line">    </span><br><span class="line">    NSLog(@<span class="string">"Video data (%lu):%@"</span>, (unsigned long)data.length,data.description);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (_fileHandle != NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        const char bytes[] = <span class="string">"\x00\x00\x00\x01"</span>;</span><br><span class="line">        size_t length = (sizeof bytes) - 1; //string literals have implicit trailing <span class="string">'\0'</span></span><br><span class="line">        NSData *ByteHeader = [NSData dataWithBytes:bytes length:length];</span><br><span class="line">        </span><br><span class="line"><span class="comment">#pragma mark</span></span><br><span class="line"><span class="comment">#pragma mark - 视频数据(data)</span></span><br><span class="line">        </span><br><span class="line">        [_fileHandle writeData:ByteHeader];</span><br><span class="line">        //[fileHandle writeData:UnitHeader];</span><br><span class="line">        [_fileHandle writeData:data];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#pragma mark - 录制</span></span><br><span class="line">- (void)startBtnClicked:(UIButton *)btn</span><br><span class="line">&#123;</span><br><span class="line">    btn.selected = !btn.selected;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (btn.selected)</span><br><span class="line">    &#123;</span><br><span class="line">        [self startCamera];</span><br><span class="line">        [_startBtn setTitle:@<span class="string">"Stop"</span> forState:UIControlStateNormal];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        [_startBtn setTitle:@<span class="string">"Start"</span> forState:UIControlStateNormal];</span><br><span class="line">        [self stopCarmera];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void) startCamera</span><br><span class="line">&#123;</span><br><span class="line">    [self setupAudioCapture];</span><br><span class="line">    [self setupVideoCapture];</span><br><span class="line">    [self.session commitConfiguration];</span><br><span class="line">    [self.session startRunning];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void) stopCarmera</span><br><span class="line">&#123;</span><br><span class="line">//    [_h264Encoder End];</span><br><span class="line">    [_session stopRunning];</span><br><span class="line">//    //close(fd);</span><br><span class="line">    [_fileHandle closeFile];</span><br><span class="line">    _fileHandle = NULL;</span><br><span class="line">//</span><br><span class="line">    // 获取程序Documents目录路径</span><br><span class="line">    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);</span><br><span class="line">    NSString *documentsDirectory = [paths objectAtIndex:0];</span><br><span class="line">    </span><br><span class="line">    NSMutableString * path = [[NSMutableString alloc]initWithString:documentsDirectory];</span><br><span class="line">    [path appendString:@<span class="string">"/AACFile"</span>];</span><br><span class="line">    </span><br><span class="line">    [_data writeToFile:path atomically:YES];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)initStartBtn</span><br><span class="line">&#123;</span><br><span class="line">    _startBtn = [UIButton buttonWithType:UIButtonTypeCustom];</span><br><span class="line">    _startBtn.frame = CGRectMake(0, 0, 100, 40);</span><br><span class="line">    _startBtn.backgroundColor = [UIColor lightGrayColor];</span><br><span class="line">    _startBtn.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, [UIScreen mainScreen].bounds.size.height - 30);</span><br><span class="line">    [_startBtn addTarget:self action:@selector(startBtnClicked:) forControlEvents:UIControlEventTouchUpInside];</span><br><span class="line">    [_startBtn setTitle:@<span class="string">"Start"</span> forState:UIControlStateNormal];</span><br><span class="line">    [_startBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];</span><br><span class="line">    [self.view addSubview:_startBtn];</span><br><span class="line">&#125;</span><br><span class="line">- (void)didReceiveMemoryWarning &#123;</span><br><span class="line">    [super didReceiveMemoryWarning];</span><br><span class="line">    // Dispose of any resources that can be recreated.</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Object-C/" rel="tag"># Object-C</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Swift-类似网易新闻的滑动菜单/" rel="next" title="Swift 类似网易新闻的滑动菜单">
+                <i class="fa fa-chevron-left"></i> Swift 类似网易新闻的滑动菜单
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/iOS-摄像头-进行音视频的数据采集/" rel="prev" title="iOS 摄像头,进行音视频的数据采集">
+                iOS 摄像头,进行音视频的数据采集 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.gif" alt="benane">
+            
+              <p class="site-author-name" itemprop="name">benane</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/yuhangjob" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:yuhangjobmail@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#H264编码-h"><span class="nav-number">1.</span> <span class="nav-text">H264编码.h</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#H264编码-m"><span class="nav-number">2.</span> <span class="nav-text">H264编码.m</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#AAC编码-h"><span class="nav-number">3.</span> <span class="nav-text">AAC编码.h</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#AAC编码-m"><span class="nav-number">4.</span> <span class="nav-text">AAC编码.m</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ViewController-m"><span class="nav-number">5.</span> <span class="nav-text">ViewController.m</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"> &copy; 2015 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">benane</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://yuhangjob.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'http://yuhangjob.top/iOS直播视频音频采集及H264-AAC编码/';
+        this.page.identifier = 'iOS直播视频音频采集及H264-AAC编码/';
+        this.page.title = 'iOS直播视频音频采集及H264 AAC编码';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://yuhangjob.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+</body>
+</html>
